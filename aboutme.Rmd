@@ -5,6 +5,30 @@ output:
     toc: FALSE
 ---
 
+![My photo](img_5697.jpg){width=40%}
 
-Add some text and a figure describing myself.
+# Brief Intro
+My name is Zhihan Xian. I graduated from the University of Maryland College Park in 2019. In college, I majored in food science and minored in computer science. After graduation, I came to UGA for my Ph.D. degree and this is my third year. My research topic involves genomic analysis of food-related bacteria.
+
+
+# Previous Data Analysis Experience 
+Most of the time, I use python and command line to process DNA sequencing data, including using existing software and writing my own scripts. I am familiar with python and java syntax. For R, I only learned to use it in my first graduate STAT class. 
+
+# Course Goal
+I hope to get more familiar with R Studio. I am also interested in the machine learning topics of this course, since it would be super useful to my research.
+
+# Personal Facts
+* Favorite sports: basketball
+* Favorite team: OKC Thunder
+* Favorite current player: Russel Westbrook
+* Favorite players of all time: Allen Iverson, Tracy McGrady
+* Favorite game: Pokemon
+* Favorite Anime: One Piece
+* Favorite color: Blue
+* Favorite Food: sashimi, oyster
+* Hobby: chess Go, saxophone, basketball, fishing
+
+# AlphaGo, A Product of Machine Learning and Artificial Intelligence
+The game Go is considered one of the most complicated and computationally intense board games. AlphaGo is the first AI to beat and sweep the top professional Go players around the world. Unlike other chess games, this was not achieved until 2016, by Google DeepMind. 
+[Link to AlphaGo Documentary](https://www.youtube.com/watch?v=WXuK6gekU1Y)
 
