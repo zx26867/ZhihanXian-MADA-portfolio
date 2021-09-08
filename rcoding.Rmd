@@ -71,3 +71,73 @@ summary(fit2)
 # since the p_value is much greater than 0, population and life_expectancy are not much associated
 
 ```
+
+#Code Added By Nicholas
+Here we look at Region and how it impacts Life Expectancy. We also run a multivariate model with Infant Mortality and Region.
+```{r}
+library(broom)
+library(ggplot2)
+# I was first interested in how region comes in to play so I made boxplots of life expectancy 
+# stratified by region. Here we see that the mean life expectancy in North African Countries is
+# much higher around 75 while others are closer to 55. 
+ggplot(data_2000, aes(x=region, y=life_expectancy, color= region)) + geom_boxplot() + ggtitle("Boxplots of Life Expectancy by Region, Africa 2000") +
+  xlab("Region") + ylab("Life Expectancy") 
+
+# After seeing this, I decided to plot the relationship between infant mortality again, 
+# but this time color in the points with region to see how this relationship might vary 
+# by region.
+
+ggplot(data_2000, aes(x=infant_mortality, y=life_expectancy, colour= region)) + geom_point() + ggtitle("Scatterplot of Infant Mortality and Life Expectancy Among African Countries") +
+  xlab("Infant Mortality Rate") + ylab("Life Expectancy") 
+
+
+#Now I want to run a model with both infant mortality and region as predictors
+
+
+#First I have to make a new variable so I can get the order correct for reference coding. 
+#Since we saw that the mean life expectancy was so much higher in 
+#North Africa, we use that as the reference. Note: I tried to do this
+#without making a new variable, but it would not work. I think it 
+#got weird because of all of the categories from other coninents. 
+#See below when I table it...
+
+table(data_2000$region)
+
+#here I make the new variable and order it as such
+data_2000$newregion <-  NA 
+data_2000$newregion[data_2000$region == "Northern Africa" ] <- "1:Northern Africa"
+data_2000$newregion[data_2000$region == "Eastern Africa" ] <- "2:Eastern Africa"
+data_2000$newregion[data_2000$region == "Middle Africa" ] <- "3:Middle Africa"
+data_2000$newregion[data_2000$region == "Southern Africa" ] <- "4:Southern Africa"
+data_2000$newregion[data_2000$region == "Western Africa" ] <- "5:Western Africa"
+
+#checking
+table(data_2000$newregion)
+
+#now we run the model with Infant Mortality and Region as predictors
+fit3 <- lm(life_expectancy ~ infant_mortality + newregion, data=data_2000)
+summary(fit3)
+tidy(fit3)
+
+```
+
+#Interpretation
+When controlling for region, we see that coefficient for infant mortality is significant at the 0.05 level. Among African countries, when controlling for region, for every one unit increase in infant mortality rate, there is a 0.18 decrease in life expectancy (p<0.001). When controlling for infant mortality, we see that the categorical variable for region has sigificant mean differences in life expectancy when comparing East vs North (p<0.001), Middle vs North (p=0.011), Southern vs North (p<0.001). The p-value for the comparison between Western and North was 0.07 so we fail to reject the null and conclude no difference between these two regions
+
+Now we look at a scatter plot and simple model of Gross Domestic Product and Life Expectancy
+```{r}
+
+#First I used ggplot to make a scatter plot of GPD (logscale) and Life Expectancy
+ggplot(data_2000, aes(x=gdp, y=life_expectancy)) + geom_point() + ggtitle("Scatterplot of GDP and Life Expectancy Among African Countries") +
+  xlab("GDP (log scale)") + ylab("Life Expectancy") + scale_x_log10() 
+
+fit4 <- lm(data_2000$life_expectancy ~ data_2000$gdp)
+summary(fit4)
+
+library(broom)
+tidy(fit4)
+
+```
+
+#Interpretation
+The results from the linear model show that the coefficient for gdp was significant at the 0.05 level. A one unit increase in GPD was asssociated with a 1.168e-10 increase in life expectancy (p=0.0152). While this association was statistically significant, the magnitude is still quite small. 
