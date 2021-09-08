@@ -7,4 +7,67 @@ output:
 
 This will contain the future R coding exercise.
 
+```{r}
+#load dslabs package
+library("dslabs")
+#look at help file for gapminder data
+help(gapminder)
+#get an overview of data structure
+str(gapminder)
+#get a summary of data
+summary(gapminder)
+#determine the type of object gapminder is
+class(gapminder)
 
+africadata = gapminder[gapminder$continent=='Africa',]
+str(africadata)
+summary(africadata)
+
+s1 = africadata[,c('infant_mortality','life_expectancy')]
+str(s1)
+summary(s1)
+
+s2 = africadata[,c('population','life_expectancy')]
+str(s2)
+summary(s2)
+s2$log_pop = log10(s2$population)
+
+attach(s1)
+plot(infant_mortality,life_expectancy,main="infant_mortality vs. life_expectancy")
+detach(s1)
+
+attach(s2)
+plot(log_pop,life_expectancy,main="log10_population vs. life_expectancy")
+detach(s2)
+# I think each streak represents an African country's life_expectancy over the past decades. As the time went by, the pupulation grew bigger, and life expectancy went up as the quality of life improved.
+
+data_2000 = africadata[africadata$year==2000,]
+str(data_2000)
+summary(data_2000)
+
+s3 = data_2000[,c('infant_mortality','life_expectancy')]
+str(s3)
+summary(s3)
+
+s4 = data_2000[,c('population','life_expectancy')]
+str(s4)
+summary(s4)
+s4$log_pop = log10(s4$population)
+
+attach(s3)
+plot(infant_mortality,life_expectancy,main="infant_mortality vs. life_expectancy")
+detach(s3)
+
+attach(s4)
+plot(log_pop,life_expectancy,main="log10_population vs. life_expectancy")
+detach(s4)
+
+fit1 <- lm(life_expectancy ~ infant_mortality, data=s3)
+summary(fit1)
+# since the p_value is close to 0, infant_mortality and life_expectancy are highly associated
+
+fit2 <- lm(life_expectancy ~ log_pop, data=s4)
+summary(fit2)
+# since the p_value is much greater than 0, population and life_expectancy are not much associated
+
+```

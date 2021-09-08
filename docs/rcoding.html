@@ -42,6 +42,98 @@
     </style>
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -274,6 +366,247 @@ $(document).ready(function () {
 
 
 <p>This will contain the future R coding exercise.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#load dslabs package</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;dslabs&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#look at help file for gapminder data</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">help</span>(gapminder)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#get an overview of data structure</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">str</span>(gapminder)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    10545 obs. of  9 variables:
+##  $ country         : Factor w/ 185 levels &quot;Albania&quot;,&quot;Algeria&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ year            : int  1960 1960 1960 1960 1960 1960 1960 1960 1960 1960 ...
+##  $ infant_mortality: num  115.4 148.2 208 NA 59.9 ...
+##  $ life_expectancy : num  62.9 47.5 36 63 65.4 ...
+##  $ fertility       : num  6.19 7.65 7.32 4.43 3.11 4.55 4.82 3.45 2.7 5.57 ...
+##  $ population      : num  1636054 11124892 5270844 54681 20619075 ...
+##  $ gdp             : num  NA 1.38e+10 NA NA 1.08e+11 ...
+##  $ continent       : Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 4 1 1 2 2 3 2 5 4 3 ...
+##  $ region          : Factor w/ 22 levels &quot;Australia and New Zealand&quot;,..: 19 11 10 2 15 21 2 1 22 21 ...</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">#get a summary of data</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">summary</span>(gapminder)</a></code></pre></div>
+<pre><code>##                 country           year      infant_mortality life_expectancy
+##  Albania            :   57   Min.   :1960   Min.   :  1.50   Min.   :13.20  
+##  Algeria            :   57   1st Qu.:1974   1st Qu.: 16.00   1st Qu.:57.50  
+##  Angola             :   57   Median :1988   Median : 41.50   Median :67.54  
+##  Antigua and Barbuda:   57   Mean   :1988   Mean   : 55.31   Mean   :64.81  
+##  Argentina          :   57   3rd Qu.:2002   3rd Qu.: 85.10   3rd Qu.:73.00  
+##  Armenia            :   57   Max.   :2016   Max.   :276.90   Max.   :83.90  
+##  (Other)            :10203                  NA&#39;s   :1453                    
+##    fertility       population             gdp               continent   
+##  Min.   :0.840   Min.   :3.124e+04   Min.   :4.040e+07   Africa  :2907  
+##  1st Qu.:2.200   1st Qu.:1.333e+06   1st Qu.:1.846e+09   Americas:2052  
+##  Median :3.750   Median :5.009e+06   Median :7.794e+09   Asia    :2679  
+##  Mean   :4.084   Mean   :2.701e+07   Mean   :1.480e+11   Europe  :2223  
+##  3rd Qu.:6.000   3rd Qu.:1.523e+07   3rd Qu.:5.540e+10   Oceania : 684  
+##  Max.   :9.220   Max.   :1.376e+09   Max.   :1.174e+13                  
+##  NA&#39;s   :187     NA&#39;s   :185         NA&#39;s   :2972                       
+##              region    
+##  Western Asia   :1026  
+##  Eastern Africa : 912  
+##  Western Africa : 912  
+##  Caribbean      : 741  
+##  South America  : 684  
+##  Southern Europe: 684  
+##  (Other)        :5586</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">#determine the type of object gapminder is</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">class</span>(gapminder)</a></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">africadata =<span class="st"> </span>gapminder[gapminder<span class="op">$</span>continent<span class="op">==</span><span class="st">&#39;Africa&#39;</span>,]</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">str</span>(africadata)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    2907 obs. of  9 variables:
+##  $ country         : Factor w/ 185 levels &quot;Albania&quot;,&quot;Algeria&quot;,..: 2 3 18 22 26 27 29 31 32 33 ...
+##  $ year            : int  1960 1960 1960 1960 1960 1960 1960 1960 1960 1960 ...
+##  $ infant_mortality: num  148 208 187 116 161 ...
+##  $ life_expectancy : num  47.5 36 38.3 50.3 35.2 ...
+##  $ fertility       : num  7.65 7.32 6.28 6.62 6.29 6.95 5.65 6.89 5.84 6.25 ...
+##  $ population      : num  11124892 5270844 2431620 524029 4829291 ...
+##  $ gdp             : num  1.38e+10 NA 6.22e+08 1.24e+08 5.97e+08 ...
+##  $ continent       : Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ region          : Factor w/ 22 levels &quot;Australia and New Zealand&quot;,..: 11 10 20 17 20 5 10 20 10 10 ...</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">summary</span>(africadata)</a></code></pre></div>
+<pre><code>##          country          year      infant_mortality life_expectancy
+##  Algeria     :  57   Min.   :1960   Min.   : 11.40   Min.   :13.20  
+##  Angola      :  57   1st Qu.:1974   1st Qu.: 62.20   1st Qu.:48.23  
+##  Benin       :  57   Median :1988   Median : 93.40   Median :53.98  
+##  Botswana    :  57   Mean   :1988   Mean   : 95.12   Mean   :54.38  
+##  Burkina Faso:  57   3rd Qu.:2002   3rd Qu.:124.70   3rd Qu.:60.10  
+##  Burundi     :  57   Max.   :2016   Max.   :237.40   Max.   :77.60  
+##  (Other)     :2565                  NA&#39;s   :226                     
+##    fertility       population             gdp               continent   
+##  Min.   :1.500   Min.   :    41538   Min.   :4.659e+07   Africa  :2907  
+##  1st Qu.:5.160   1st Qu.:  1605232   1st Qu.:8.373e+08   Americas:   0  
+##  Median :6.160   Median :  5570982   Median :2.448e+09   Asia    :   0  
+##  Mean   :5.851   Mean   : 12235961   Mean   :9.346e+09   Europe  :   0  
+##  3rd Qu.:6.860   3rd Qu.: 13888152   3rd Qu.:6.552e+09   Oceania :   0  
+##  Max.   :8.450   Max.   :182201962   Max.   :1.935e+11                  
+##  NA&#39;s   :51      NA&#39;s   :51          NA&#39;s   :637                        
+##                        region   
+##  Eastern Africa           :912  
+##  Western Africa           :912  
+##  Middle Africa            :456  
+##  Northern Africa          :342  
+##  Southern Africa          :285  
+##  Australia and New Zealand:  0  
+##  (Other)                  :  0</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">s1 =<span class="st"> </span>africadata[,<span class="kw">c</span>(<span class="st">&#39;infant_mortality&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">str</span>(s1)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    2907 obs. of  2 variables:
+##  $ infant_mortality: num  148 208 187 116 161 ...
+##  $ life_expectancy : num  47.5 36 38.3 50.3 35.2 ...</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">summary</span>(s1)</a></code></pre></div>
+<pre><code>##  infant_mortality life_expectancy
+##  Min.   : 11.40   Min.   :13.20  
+##  1st Qu.: 62.20   1st Qu.:48.23  
+##  Median : 93.40   Median :53.98  
+##  Mean   : 95.12   Mean   :54.38  
+##  3rd Qu.:124.70   3rd Qu.:60.10  
+##  Max.   :237.40   Max.   :77.60  
+##  NA&#39;s   :226</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">s2 =<span class="st"> </span>africadata[,<span class="kw">c</span>(<span class="st">&#39;population&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">str</span>(s2)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    2907 obs. of  2 variables:
+##  $ population     : num  11124892 5270844 2431620 524029 4829291 ...
+##  $ life_expectancy: num  47.5 36 38.3 50.3 35.2 ...</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">summary</span>(s2)</a></code></pre></div>
+<pre><code>##    population        life_expectancy
+##  Min.   :    41538   Min.   :13.20  
+##  1st Qu.:  1605232   1st Qu.:48.23  
+##  Median :  5570982   Median :53.98  
+##  Mean   : 12235961   Mean   :54.38  
+##  3rd Qu.: 13888152   3rd Qu.:60.10  
+##  Max.   :182201962   Max.   :77.60  
+##  NA&#39;s   :51</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">s2<span class="op">$</span>log_pop =<span class="st"> </span><span class="kw">log10</span>(s2<span class="op">$</span>population)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw">attach</span>(s1)</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw">plot</span>(infant_mortality,life_expectancy,<span class="dt">main=</span><span class="st">&quot;infant_mortality vs. life_expectancy&quot;</span>)</a></code></pre></div>
+<p><img src="rcoding_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">detach</span>(s1)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="kw">attach</span>(s2)</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="kw">plot</span>(log_pop,life_expectancy,<span class="dt">main=</span><span class="st">&quot;log10_population vs. life_expectancy&quot;</span>)</a></code></pre></div>
+<p><img src="rcoding_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">detach</span>(s2)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co"># I think each streak represents an African country&#39;s life_expectancy over the past decades. As the time went by, the pupulation grew bigger, and life expectancy went up as the quality of life improved.</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">data_<span class="dv">2000</span> =<span class="st"> </span>africadata[africadata<span class="op">$</span>year<span class="op">==</span><span class="dv">2000</span>,]</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="kw">str</span>(data_<span class="dv">2000</span>)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    51 obs. of  9 variables:
+##  $ country         : Factor w/ 185 levels &quot;Albania&quot;,&quot;Algeria&quot;,..: 2 3 18 22 26 27 29 31 32 33 ...
+##  $ year            : int  2000 2000 2000 2000 2000 2000 2000 2000 2000 2000 ...
+##  $ infant_mortality: num  33.9 128.3 89.3 52.4 96.2 ...
+##  $ life_expectancy : num  73.3 52.3 57.2 47.6 52.6 46.7 54.3 68.4 45.3 51.5 ...
+##  $ fertility       : num  2.51 6.84 5.98 3.41 6.59 7.06 5.62 3.7 5.45 7.35 ...
+##  $ population      : num  31183658 15058638 6949366 1736579 11607944 ...
+##  $ gdp             : num  5.48e+10 9.13e+09 2.25e+09 5.63e+09 2.61e+09 ...
+##  $ continent       : Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ region          : Factor w/ 22 levels &quot;Australia and New Zealand&quot;,..: 11 10 20 17 20 5 10 20 10 10 ...</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">summary</span>(data_<span class="dv">2000</span>)</a></code></pre></div>
+<pre><code>##          country        year      infant_mortality life_expectancy
+##  Algeria     : 1   Min.   :2000   Min.   : 12.30   Min.   :37.60  
+##  Angola      : 1   1st Qu.:2000   1st Qu.: 60.80   1st Qu.:51.75  
+##  Benin       : 1   Median :2000   Median : 80.30   Median :54.30  
+##  Botswana    : 1   Mean   :2000   Mean   : 78.93   Mean   :56.36  
+##  Burkina Faso: 1   3rd Qu.:2000   3rd Qu.:103.30   3rd Qu.:60.00  
+##  Burundi     : 1   Max.   :2000   Max.   :143.30   Max.   :75.00  
+##  (Other)     :45                                                  
+##    fertility       population             gdp               continent 
+##  Min.   :1.990   Min.   :    81154   Min.   :2.019e+08   Africa  :51  
+##  1st Qu.:4.150   1st Qu.:  2304687   1st Qu.:1.274e+09   Americas: 0  
+##  Median :5.550   Median :  8799165   Median :3.238e+09   Asia    : 0  
+##  Mean   :5.156   Mean   : 15659800   Mean   :1.155e+10   Europe  : 0  
+##  3rd Qu.:5.960   3rd Qu.: 17391242   3rd Qu.:8.654e+09   Oceania : 0  
+##  Max.   :7.730   Max.   :122876723   Max.   :1.329e+11                
+##                                                                       
+##                        region  
+##  Eastern Africa           :16  
+##  Western Africa           :16  
+##  Middle Africa            : 8  
+##  Northern Africa          : 6  
+##  Southern Africa          : 5  
+##  Australia and New Zealand: 0  
+##  (Other)                  : 0</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">s3 =<span class="st"> </span>data_<span class="dv">2000</span>[,<span class="kw">c</span>(<span class="st">&#39;infant_mortality&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">str</span>(s3)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    51 obs. of  2 variables:
+##  $ infant_mortality: num  33.9 128.3 89.3 52.4 96.2 ...
+##  $ life_expectancy : num  73.3 52.3 57.2 47.6 52.6 46.7 54.3 68.4 45.3 51.5 ...</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">summary</span>(s3)</a></code></pre></div>
+<pre><code>##  infant_mortality life_expectancy
+##  Min.   : 12.30   Min.   :37.60  
+##  1st Qu.: 60.80   1st Qu.:51.75  
+##  Median : 80.30   Median :54.30  
+##  Mean   : 78.93   Mean   :56.36  
+##  3rd Qu.:103.30   3rd Qu.:60.00  
+##  Max.   :143.30   Max.   :75.00</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">s4 =<span class="st"> </span>data_<span class="dv">2000</span>[,<span class="kw">c</span>(<span class="st">&#39;population&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw">str</span>(s4)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    51 obs. of  2 variables:
+##  $ population     : num  31183658 15058638 6949366 1736579 11607944 ...
+##  $ life_expectancy: num  73.3 52.3 57.2 47.6 52.6 46.7 54.3 68.4 45.3 51.5 ...</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">summary</span>(s4)</a></code></pre></div>
+<pre><code>##    population        life_expectancy
+##  Min.   :    81154   Min.   :37.60  
+##  1st Qu.:  2304687   1st Qu.:51.75  
+##  Median :  8799165   Median :54.30  
+##  Mean   : 15659800   Mean   :56.36  
+##  3rd Qu.: 17391242   3rd Qu.:60.00  
+##  Max.   :122876723   Max.   :75.00</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">s4<span class="op">$</span>log_pop =<span class="st"> </span><span class="kw">log10</span>(s4<span class="op">$</span>population)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="kw">attach</span>(s3)</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4"><span class="kw">plot</span>(infant_mortality,life_expectancy,<span class="dt">main=</span><span class="st">&quot;infant_mortality vs. life_expectancy&quot;</span>)</a></code></pre></div>
+<p><img src="rcoding_files/figure-html/unnamed-chunk-1-3.png" width="672" /></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">detach</span>(s3)</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="kw">attach</span>(s4)</a>
+<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="kw">plot</span>(log_pop,life_expectancy,<span class="dt">main=</span><span class="st">&quot;log10_population vs. life_expectancy&quot;</span>)</a></code></pre></div>
+<p><img src="rcoding_files/figure-html/unnamed-chunk-1-4.png" width="672" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">detach</span>(s4)</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <span class="op">~</span><span class="st"> </span>infant_mortality, <span class="dt">data=</span>s3)</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="kw">summary</span>(fit1)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = life_expectancy ~ infant_mortality, data = s3)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -22.6651  -3.7087   0.9914   4.0408   8.6817 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      71.29331    2.42611  29.386  &lt; 2e-16 ***
+## infant_mortality -0.18916    0.02869  -6.594 2.83e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.221 on 49 degrees of freedom
+## Multiple R-squared:  0.4701, Adjusted R-squared:  0.4593 
+## F-statistic: 43.48 on 1 and 49 DF,  p-value: 2.826e-08</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># since the p_value is close to 0, infant_mortality and life_expectancy are highly associated</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <span class="op">~</span><span class="st"> </span>log_pop, <span class="dt">data=</span>s4)</a>
+<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="kw">summary</span>(fit2)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = life_expectancy ~ log_pop, data = s4)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -19.113  -4.809  -1.554   3.907  18.863 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   65.324     12.520   5.217 3.65e-06 ***
+## log_pop       -1.315      1.829  -0.719    0.476    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8.502 on 49 degrees of freedom
+## Multiple R-squared:  0.01044,    Adjusted R-squared:  -0.009755 
+## F-statistic: 0.517 on 1 and 49 DF,  p-value: 0.4755</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># since the p_value is much greater than 0, population and life_expectancy are not much associated</span></a></code></pre></div>
 
 
 
