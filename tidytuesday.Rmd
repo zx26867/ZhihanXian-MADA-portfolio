@@ -5,5 +5,52 @@ output:
     toc: FALSE
 ---
 
-This will contain the future Tidy Tuesday exercise.
 
+```{r warning=FALSE}
+library(tidytuesdayR)
+library(dplyr)
+library(ggplot2)
+
+combo_df <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-28/combo_df.csv',show_col_types = FALSE)
+
+combo_df
+# check for numeric range of variable year and month
+summary(combo_df)
+
+# The goal is to find out the top 20 productive authors in the past 2 decades
+recent_data = combo_df %>% filter(year>=2001)
+
+author_ranking = recent_data %>% group_by(name) %>% summarise(Count = n()) %>% arrange(desc(Count))
+
+# top 20 author list and barchart
+author_ranking[0:20,]
+ggplot(data=author_ranking[0:20,], aes(x=name, y=Count)) +geom_bar(stat="identity") + coord_flip()
+
+# The goal is to find out the top 10 programs contributing to the research in the past 2 decades
+# extract paper and program column
+pg = recent_data %>% select(paper,program)
+# a paper may have multiple observations (rows), have to remove duplicates so we only count a contributing program once per paper
+program_data = pg %>% distinct()
+
+program_ranking = program_data %>% group_by(program) %>% summarise(Count = n()) %>% arrange(desc(Count))
+
+# top 10 program list
+program_ranking[0:10,]
+
+df2 <- program_data %>% 
+  group_by(program) %>% # Variable to be transformed
+  count() %>% 
+  ungroup() %>% 
+  mutate(perc = `n` / sum(`n`)) %>% 
+  arrange(perc) %>%
+  mutate(labels = scales::percent(perc))
+
+# make a piechart
+ggplot(df2, aes(x="", y=perc, fill=program)) +
+  geom_col() +
+  coord_polar(theta = "y") + 
+  geom_bar(stat="identity", width=1, color="white") + 
+  theme_void() + 
+  geom_label(aes(label = labels), position = position_stack(vjust = 0.5), show.legend = FALSE)
+
+```
