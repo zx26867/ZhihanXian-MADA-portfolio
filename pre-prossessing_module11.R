@@ -13,7 +13,7 @@ library(ggplot2)
 
 #path to data
 #note the use of the here() package and not absolute paths
-data_location <- here::here("file","processeddata.rds")
+data_location <- here::here("files","processeddata.rds")
 
 #load data. 
 #note that for functions that come from specific packages (instead of base R)

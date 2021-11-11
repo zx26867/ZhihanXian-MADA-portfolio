@@ -22,7 +22,7 @@ library(glmnet)
 library(ranger)
 
 #path to data
-data_location <- here::here("file","processeddata_m11.rds")
+data_location <- here::here("files","processeddata_m11.rds")
 
 #load data. 
 mydata <- readRDS(data_location)

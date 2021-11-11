@@ -13,7 +13,7 @@
 
 <title>R coding Exercise</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/darkly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -51,42 +51,66 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
-td.sourceCode { padding-left: 5px; }
-pre, code { color: #cccccc; background-color: #303030; }
-code > span.kw { color: #f0dfaf; } /* Keyword */
-code > span.dt { color: #dfdfbf; } /* DataType */
-code > span.dv { color: #dcdccc; } /* DecVal */
-code > span.bn { color: #dca3a3; } /* BaseN */
-code > span.fl { color: #c0bed1; } /* Float */
-code > span.ch { color: #dca3a3; } /* Char */
-code > span.st { color: #cc9393; } /* String */
-code > span.co { color: #7f9f7f; } /* Comment */
-code > span.ot { color: #efef8f; } /* Other */
-code > span.al { color: #ffcfaf; } /* Alert */
-code > span.fu { color: #efef8f; } /* Function */
-code > span.er { color: #c3bf9f; } /* Error */
-code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
-code > span.sc { color: #dca3a3; } /* SpecialChar */
-code > span.vs { color: #cc9393; } /* VerbatimString */
-code > span.ss { color: #cc9393; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { color: #f0dfaf; } /* ControlFlow */
-code > span.op { color: #f0efd0; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #7f9f7f; } /* Documentation */
-code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
-code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
-code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 
 </style>
 <script>
@@ -317,12 +341,15 @@ $(document).ready(function () {
     <li>
       <a href="./tidytuesday.html">Tidy Tuesday</a>
     </li>
+    <li>
+      <a href="./tidytuesday_exercise2.html">Tidy Tuesday 2 Exercise</a>
+    </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://zx26867.github.io/ZhihanXian-MADA-portfolio/">
+  <a href="https://github.com/zx26867/ZhihanXian-MADA-portfolio">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -342,12 +369,12 @@ $(document).ready(function () {
 
 
 <p>This will contain the future R coding exercise.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#load dslabs package</span>
-<span class="kw">library</span>(<span class="st">&quot;dslabs&quot;</span>)
-<span class="co">#look at help file for gapminder data</span>
-<span class="kw">help</span>(gapminder)
-<span class="co">#get an overview of data structure</span>
-<span class="kw">str</span>(gapminder)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#load dslabs package</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;dslabs&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#look at help file for gapminder data</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">help</span>(gapminder)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#get an overview of data structure</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">str</span>(gapminder)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    10545 obs. of  9 variables:
 ##  $ country         : Factor w/ 185 levels &quot;Albania&quot;,&quot;Algeria&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ year            : int  1960 1960 1960 1960 1960 1960 1960 1960 1960 1960 ...
@@ -358,8 +385,8 @@ $(document).ready(function () {
 ##  $ gdp             : num  NA 1.38e+10 NA NA 1.08e+11 ...
 ##  $ continent       : Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 4 1 1 2 2 3 2 5 4 3 ...
 ##  $ region          : Factor w/ 22 levels &quot;Australia and New Zealand&quot;,..: 19 11 10 2 15 21 2 1 22 21 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#get a summary of data</span>
-<span class="kw">summary</span>(gapminder)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">#get a summary of data</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">summary</span>(gapminder)</a></code></pre></div>
 <pre><code>##                 country           year      infant_mortality life_expectancy
 ##  Albania            :   57   Min.   :1960   Min.   :  1.50   Min.   :13.20  
 ##  Algeria            :   57   1st Qu.:1974   1st Qu.: 16.00   1st Qu.:57.50  
@@ -384,11 +411,11 @@ $(document).ready(function () {
 ##  South America  : 684  
 ##  Southern Europe: 684  
 ##  (Other)        :5586</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#determine the type of object gapminder is</span>
-<span class="kw">class</span>(gapminder)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">#determine the type of object gapminder is</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">class</span>(gapminder)</a></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">africadata =<span class="st"> </span>gapminder[gapminder<span class="op">$</span>continent<span class="op">==</span><span class="st">&#39;Africa&#39;</span>,]
-<span class="kw">str</span>(africadata)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">africadata =<span class="st"> </span>gapminder[gapminder<span class="op">$</span>continent<span class="op">==</span><span class="st">&#39;Africa&#39;</span>,]</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">str</span>(africadata)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    2907 obs. of  9 variables:
 ##  $ country         : Factor w/ 185 levels &quot;Albania&quot;,&quot;Algeria&quot;,..: 2 3 18 22 26 27 29 31 32 33 ...
 ##  $ year            : int  1960 1960 1960 1960 1960 1960 1960 1960 1960 1960 ...
@@ -399,7 +426,7 @@ $(document).ready(function () {
 ##  $ gdp             : num  1.38e+10 NA 6.22e+08 1.24e+08 5.97e+08 ...
 ##  $ continent       : Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ region          : Factor w/ 22 levels &quot;Australia and New Zealand&quot;,..: 11 10 20 17 20 5 10 20 10 10 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(africadata)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">summary</span>(africadata)</a></code></pre></div>
 <pre><code>##          country          year      infant_mortality life_expectancy
 ##  Algeria     :  57   Min.   :1960   Min.   : 11.40   Min.   :13.20  
 ##  Angola      :  57   1st Qu.:1974   1st Qu.: 62.20   1st Qu.:48.23  
@@ -424,12 +451,12 @@ $(document).ready(function () {
 ##  Southern Africa          :285  
 ##  Australia and New Zealand:  0  
 ##  (Other)                  :  0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s1 =<span class="st"> </span>africadata[,<span class="kw">c</span>(<span class="st">&#39;infant_mortality&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]
-<span class="kw">str</span>(s1)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">s1 =<span class="st"> </span>africadata[,<span class="kw">c</span>(<span class="st">&#39;infant_mortality&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">str</span>(s1)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    2907 obs. of  2 variables:
 ##  $ infant_mortality: num  148 208 187 116 161 ...
 ##  $ life_expectancy : num  47.5 36 38.3 50.3 35.2 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(s1)</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">summary</span>(s1)</a></code></pre></div>
 <pre><code>##  infant_mortality life_expectancy
 ##  Min.   : 11.40   Min.   :13.20  
 ##  1st Qu.: 62.20   1st Qu.:48.23  
@@ -438,12 +465,12 @@ $(document).ready(function () {
 ##  3rd Qu.:124.70   3rd Qu.:60.10  
 ##  Max.   :237.40   Max.   :77.60  
 ##  NA&#39;s   :226</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s2 =<span class="st"> </span>africadata[,<span class="kw">c</span>(<span class="st">&#39;population&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]
-<span class="kw">str</span>(s2)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">s2 =<span class="st"> </span>africadata[,<span class="kw">c</span>(<span class="st">&#39;population&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">str</span>(s2)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    2907 obs. of  2 variables:
 ##  $ population     : num  11124892 5270844 2431620 524029 4829291 ...
 ##  $ life_expectancy: num  47.5 36 38.3 50.3 35.2 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(s2)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">summary</span>(s2)</a></code></pre></div>
 <pre><code>##    population        life_expectancy
 ##  Min.   :    41538   Min.   :13.20  
 ##  1st Qu.:  1605232   1st Qu.:48.23  
@@ -452,21 +479,24 @@ $(document).ready(function () {
 ##  3rd Qu.: 13888152   3rd Qu.:60.10  
 ##  Max.   :182201962   Max.   :77.60  
 ##  NA&#39;s   :51</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s2<span class="op">$</span>log_pop =<span class="st"> </span><span class="kw">log10</span>(s2<span class="op">$</span>population)
-
-<span class="kw">attach</span>(s1)
-<span class="kw">plot</span>(infant_mortality,life_expectancy,<span class="dt">main=</span><span class="st">&quot;infant_mortality vs. life_expectancy&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">s2<span class="op">$</span>log_pop =<span class="st"> </span><span class="kw">log10</span>(s2<span class="op">$</span>population)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw">attach</span>(s1)</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw">plot</span>(infant_mortality,life_expectancy,<span class="dt">main=</span><span class="st">&quot;infant_mortality vs. life_expectancy&quot;</span>)</a></code></pre></div>
 <p><img src="rcoding_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">detach</span>(s1)
-
-<span class="kw">attach</span>(s2)
-<span class="kw">plot</span>(log_pop,life_expectancy,<span class="dt">main=</span><span class="st">&quot;log10_population vs. life_expectancy&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">detach</span>(s1)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="kw">attach</span>(s2)</a></code></pre></div>
+<pre><code>## The following object is masked from package:tidyr:
+## 
+##     population</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">plot</span>(log_pop,life_expectancy,<span class="dt">main=</span><span class="st">&quot;log10_population vs. life_expectancy&quot;</span>)</a></code></pre></div>
 <p><img src="rcoding_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">detach</span>(s2)
-<span class="co"># I think each streak represents an African country&#39;s life_expectancy over the past decades. As the time went by, the pupulation grew bigger, and life expectancy went up as the quality of life improved.</span>
-
-data_<span class="dv">2000</span> =<span class="st"> </span>africadata[africadata<span class="op">$</span>year<span class="op">==</span><span class="dv">2000</span>,]
-<span class="kw">str</span>(data_<span class="dv">2000</span>)</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">detach</span>(s2)</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="co"># I think each streak represents an African country&#39;s life_expectancy over the past decades. As the time went by, the pupulation grew bigger, and life expectancy went up as the quality of life improved.</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">data_<span class="dv">2000</span> =<span class="st"> </span>africadata[africadata<span class="op">$</span>year<span class="op">==</span><span class="dv">2000</span>,]</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="kw">str</span>(data_<span class="dv">2000</span>)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    51 obs. of  9 variables:
 ##  $ country         : Factor w/ 185 levels &quot;Albania&quot;,&quot;Algeria&quot;,..: 2 3 18 22 26 27 29 31 32 33 ...
 ##  $ year            : int  2000 2000 2000 2000 2000 2000 2000 2000 2000 2000 ...
@@ -477,7 +507,7 @@ data_<span class="dv">2000</span> =<span class="st"> </span>africadata[africadat
 ##  $ gdp             : num  5.48e+10 9.13e+09 2.25e+09 5.63e+09 2.61e+09 ...
 ##  $ continent       : Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ region          : Factor w/ 22 levels &quot;Australia and New Zealand&quot;,..: 11 10 20 17 20 5 10 20 10 10 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(data_<span class="dv">2000</span>)</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">summary</span>(data_<span class="dv">2000</span>)</a></code></pre></div>
 <pre><code>##          country        year      infant_mortality life_expectancy
 ##  Algeria     : 1   Min.   :2000   Min.   : 12.30   Min.   :37.60  
 ##  Angola      : 1   1st Qu.:2000   1st Qu.: 60.80   1st Qu.:51.75  
@@ -502,12 +532,12 @@ data_<span class="dv">2000</span> =<span class="st"> </span>africadata[africadat
 ##  Southern Africa          : 5  
 ##  Australia and New Zealand: 0  
 ##  (Other)                  : 0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s3 =<span class="st"> </span>data_<span class="dv">2000</span>[,<span class="kw">c</span>(<span class="st">&#39;infant_mortality&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]
-<span class="kw">str</span>(s3)</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">s3 =<span class="st"> </span>data_<span class="dv">2000</span>[,<span class="kw">c</span>(<span class="st">&#39;infant_mortality&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw">str</span>(s3)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    51 obs. of  2 variables:
 ##  $ infant_mortality: num  33.9 128.3 89.3 52.4 96.2 ...
 ##  $ life_expectancy : num  73.3 52.3 57.2 47.6 52.6 46.7 54.3 68.4 45.3 51.5 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(s3)</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">summary</span>(s3)</a></code></pre></div>
 <pre><code>##  infant_mortality life_expectancy
 ##  Min.   : 12.30   Min.   :37.60  
 ##  1st Qu.: 60.80   1st Qu.:51.75  
@@ -515,12 +545,12 @@ data_<span class="dv">2000</span> =<span class="st"> </span>africadata[africadat
 ##  Mean   : 78.93   Mean   :56.36  
 ##  3rd Qu.:103.30   3rd Qu.:60.00  
 ##  Max.   :143.30   Max.   :75.00</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s4 =<span class="st"> </span>data_<span class="dv">2000</span>[,<span class="kw">c</span>(<span class="st">&#39;population&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]
-<span class="kw">str</span>(s4)</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">s4 =<span class="st"> </span>data_<span class="dv">2000</span>[,<span class="kw">c</span>(<span class="st">&#39;population&#39;</span>,<span class="st">&#39;life_expectancy&#39;</span>)]</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">str</span>(s4)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    51 obs. of  2 variables:
 ##  $ population     : num  31183658 15058638 6949366 1736579 11607944 ...
 ##  $ life_expectancy: num  73.3 52.3 57.2 47.6 52.6 46.7 54.3 68.4 45.3 51.5 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(s4)</code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">summary</span>(s4)</a></code></pre></div>
 <pre><code>##    population        life_expectancy
 ##  Min.   :    81154   Min.   :37.60  
 ##  1st Qu.:  2304687   1st Qu.:51.75  
@@ -528,20 +558,23 @@ data_<span class="dv">2000</span> =<span class="st"> </span>africadata[africadat
 ##  Mean   : 15659800   Mean   :56.36  
 ##  3rd Qu.: 17391242   3rd Qu.:60.00  
 ##  Max.   :122876723   Max.   :75.00</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s4<span class="op">$</span>log_pop =<span class="st"> </span><span class="kw">log10</span>(s4<span class="op">$</span>population)
-
-<span class="kw">attach</span>(s3)
-<span class="kw">plot</span>(infant_mortality,life_expectancy,<span class="dt">main=</span><span class="st">&quot;infant_mortality vs. life_expectancy&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">s4<span class="op">$</span>log_pop =<span class="st"> </span><span class="kw">log10</span>(s4<span class="op">$</span>population)</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="kw">attach</span>(s3)</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="kw">plot</span>(infant_mortality,life_expectancy,<span class="dt">main=</span><span class="st">&quot;infant_mortality vs. life_expectancy&quot;</span>)</a></code></pre></div>
 <p><img src="rcoding_files/figure-html/unnamed-chunk-1-3.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">detach</span>(s3)
-
-<span class="kw">attach</span>(s4)
-<span class="kw">plot</span>(log_pop,life_expectancy,<span class="dt">main=</span><span class="st">&quot;log10_population vs. life_expectancy&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">detach</span>(s3)</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="kw">attach</span>(s4)</a></code></pre></div>
+<pre><code>## The following object is masked from package:tidyr:
+## 
+##     population</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">plot</span>(log_pop,life_expectancy,<span class="dt">main=</span><span class="st">&quot;log10_population vs. life_expectancy&quot;</span>)</a></code></pre></div>
 <p><img src="rcoding_files/figure-html/unnamed-chunk-1-4.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">detach</span>(s4)
-
-fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <span class="op">~</span><span class="st"> </span>infant_mortality, <span class="dt">data=</span>s3)
-<span class="kw">summary</span>(fit1)</code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">detach</span>(s4)</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <span class="op">~</span><span class="st"> </span>infant_mortality, <span class="dt">data=</span>s3)</a>
+<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="kw">summary</span>(fit1)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = life_expectancy ~ infant_mortality, data = s3)
@@ -560,10 +593,10 @@ fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <s
 ## Residual standard error: 6.221 on 49 degrees of freedom
 ## Multiple R-squared:  0.4701, Adjusted R-squared:  0.4593 
 ## F-statistic: 43.48 on 1 and 49 DF,  p-value: 2.826e-08</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># since the p_value is close to 0, infant_mortality and life_expectancy are highly associated</span>
-
-fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <span class="op">~</span><span class="st"> </span>log_pop, <span class="dt">data=</span>s4)
-<span class="kw">summary</span>(fit2)</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># since the p_value is close to 0, infant_mortality and life_expectancy are highly associated</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <span class="op">~</span><span class="st"> </span>log_pop, <span class="dt">data=</span>s4)</a>
+<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="kw">summary</span>(fit2)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = life_expectancy ~ log_pop, data = s4)
@@ -582,36 +615,34 @@ fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <s
 ## Residual standard error: 8.502 on 49 degrees of freedom
 ## Multiple R-squared:  0.01044,    Adjusted R-squared:  -0.009755 
 ## F-statistic: 0.517 on 1 and 49 DF,  p-value: 0.4755</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># since the p_value is much greater than 0, population and life_expectancy are not much associated</span></code></pre></div>
-<div id="code-added-by-nicholas" class="section level1">
-<h1>Code Added By Nicholas</h1>
-<p>Here we look at Region and how it impacts Life Expectancy. We also run a multivariate model with Infant Mortality and Region.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
-<span class="kw">library</span>(ggplot2)
-<span class="co"># I was first interested in how region comes in to play so I made boxplots of life expectancy </span>
-<span class="co"># stratified by region. Here we see that the mean life expectancy in North African Countries is</span>
-<span class="co"># much higher around 75 while others are closer to 55. </span>
-<span class="kw">ggplot</span>(data_<span class="dv">2000</span>, <span class="kw">aes</span>(<span class="dt">x=</span>region, <span class="dt">y=</span>life_expectancy, <span class="dt">color=</span> region)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Boxplots of Life Expectancy by Region, Africa 2000&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Region&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Life Expectancy&quot;</span>) </code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co"># since the p_value is much greater than 0, population and life_expectancy are not much associated</span></a></code></pre></div>
+<p>#Code Added By Nicholas Here we look at Region and how it impacts Life Expectancy. We also run a multivariate model with Infant Mortality and Region.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">library</span>(broom)</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="co"># I was first interested in how region comes in to play so I made boxplots of life expectancy </span></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"><span class="co"># stratified by region. Here we see that the mean life expectancy in North African Countries is</span></a>
+<a class="sourceLine" id="cb44-5" data-line-number="5"><span class="co"># much higher around 75 while others are closer to 55. </span></a>
+<a class="sourceLine" id="cb44-6" data-line-number="6"><span class="kw">ggplot</span>(data_<span class="dv">2000</span>, <span class="kw">aes</span>(<span class="dt">x=</span>region, <span class="dt">y=</span>life_expectancy, <span class="dt">color=</span> region)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Boxplots of Life Expectancy by Region, Africa 2000&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb44-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Region&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Life Expectancy&quot;</span>) </a></code></pre></div>
 <p><img src="rcoding_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># After seeing this, I decided to plot the relationship between infant mortality again, </span>
-<span class="co"># but this time color in the points with region to see how this relationship might vary </span>
-<span class="co"># by region.</span>
-
-<span class="kw">ggplot</span>(data_<span class="dv">2000</span>, <span class="kw">aes</span>(<span class="dt">x=</span>infant_mortality, <span class="dt">y=</span>life_expectancy, <span class="dt">colour=</span> region)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Scatterplot of Infant Mortality and Life Expectancy Among African Countries&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Infant Mortality Rate&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Life Expectancy&quot;</span>) </code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co"># After seeing this, I decided to plot the relationship between infant mortality again, </span></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="co"># but this time color in the points with region to see how this relationship might vary </span></a>
+<a class="sourceLine" id="cb45-3" data-line-number="3"><span class="co"># by region.</span></a>
+<a class="sourceLine" id="cb45-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb45-5" data-line-number="5"><span class="kw">ggplot</span>(data_<span class="dv">2000</span>, <span class="kw">aes</span>(<span class="dt">x=</span>infant_mortality, <span class="dt">y=</span>life_expectancy, <span class="dt">colour=</span> region)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Scatterplot of Infant Mortality and Life Expectancy Among African Countries&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb45-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Infant Mortality Rate&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Life Expectancy&quot;</span>) </a></code></pre></div>
 <p><img src="rcoding_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Now I want to run a model with both infant mortality and region as predictors</span>
-
-
-<span class="co">#First I have to make a new variable so I can get the order correct for reference coding. </span>
-<span class="co">#Since we saw that the mean life expectancy was so much higher in </span>
-<span class="co">#North Africa, we use that as the reference. Note: I tried to do this</span>
-<span class="co">#without making a new variable, but it would not work. I think it </span>
-<span class="co">#got weird because of all of the categories from other coninents. </span>
-<span class="co">#See below when I table it...</span>
-
-<span class="kw">table</span>(data_<span class="dv">2000</span><span class="op">$</span>region)</code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co">#Now I want to run a model with both infant mortality and region as predictors</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb46-4" data-line-number="4"><span class="co">#First I have to make a new variable so I can get the order correct for reference coding. </span></a>
+<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="co">#Since we saw that the mean life expectancy was so much higher in </span></a>
+<a class="sourceLine" id="cb46-6" data-line-number="6"><span class="co">#North Africa, we use that as the reference. Note: I tried to do this</span></a>
+<a class="sourceLine" id="cb46-7" data-line-number="7"><span class="co">#without making a new variable, but it would not work. I think it </span></a>
+<a class="sourceLine" id="cb46-8" data-line-number="8"><span class="co">#got weird because of all of the categories from other coninents. </span></a>
+<a class="sourceLine" id="cb46-9" data-line-number="9"><span class="co">#See below when I table it...</span></a>
+<a class="sourceLine" id="cb46-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb46-11" data-line-number="11"><span class="kw">table</span>(data_<span class="dv">2000</span><span class="op">$</span>region)</a></code></pre></div>
 <pre><code>## 
 ## Australia and New Zealand                 Caribbean           Central America 
 ##                         0                         0                         0 
@@ -629,24 +660,24 @@ fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <s
 ##                         0                        16                         0 
 ##            Western Europe 
 ##                         0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#here I make the new variable and order it as such</span>
-data_<span class="dv">2000</span><span class="op">$</span>newregion &lt;-<span class="st">  </span><span class="ot">NA</span> 
-data_<span class="dv">2000</span><span class="op">$</span>newregion[data_<span class="dv">2000</span><span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;Northern Africa&quot;</span> ] &lt;-<span class="st"> &quot;1:Northern Africa&quot;</span>
-data_<span class="dv">2000</span><span class="op">$</span>newregion[data_<span class="dv">2000</span><span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;Eastern Africa&quot;</span> ] &lt;-<span class="st"> &quot;2:Eastern Africa&quot;</span>
-data_<span class="dv">2000</span><span class="op">$</span>newregion[data_<span class="dv">2000</span><span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;Middle Africa&quot;</span> ] &lt;-<span class="st"> &quot;3:Middle Africa&quot;</span>
-data_<span class="dv">2000</span><span class="op">$</span>newregion[data_<span class="dv">2000</span><span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;Southern Africa&quot;</span> ] &lt;-<span class="st"> &quot;4:Southern Africa&quot;</span>
-data_<span class="dv">2000</span><span class="op">$</span>newregion[data_<span class="dv">2000</span><span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;Western Africa&quot;</span> ] &lt;-<span class="st"> &quot;5:Western Africa&quot;</span>
-
-<span class="co">#checking</span>
-<span class="kw">table</span>(data_<span class="dv">2000</span><span class="op">$</span>newregion)</code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co">#here I make the new variable and order it as such</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">data_<span class="dv">2000</span><span class="op">$</span>newregion &lt;-<span class="st">  </span><span class="ot">NA</span> </a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">data_<span class="dv">2000</span><span class="op">$</span>newregion[data_<span class="dv">2000</span><span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;Northern Africa&quot;</span> ] &lt;-<span class="st"> &quot;1:Northern Africa&quot;</span></a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">data_<span class="dv">2000</span><span class="op">$</span>newregion[data_<span class="dv">2000</span><span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;Eastern Africa&quot;</span> ] &lt;-<span class="st"> &quot;2:Eastern Africa&quot;</span></a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">data_<span class="dv">2000</span><span class="op">$</span>newregion[data_<span class="dv">2000</span><span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;Middle Africa&quot;</span> ] &lt;-<span class="st"> &quot;3:Middle Africa&quot;</span></a>
+<a class="sourceLine" id="cb48-6" data-line-number="6">data_<span class="dv">2000</span><span class="op">$</span>newregion[data_<span class="dv">2000</span><span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;Southern Africa&quot;</span> ] &lt;-<span class="st"> &quot;4:Southern Africa&quot;</span></a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">data_<span class="dv">2000</span><span class="op">$</span>newregion[data_<span class="dv">2000</span><span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;Western Africa&quot;</span> ] &lt;-<span class="st"> &quot;5:Western Africa&quot;</span></a>
+<a class="sourceLine" id="cb48-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb48-9" data-line-number="9"><span class="co">#checking</span></a>
+<a class="sourceLine" id="cb48-10" data-line-number="10"><span class="kw">table</span>(data_<span class="dv">2000</span><span class="op">$</span>newregion)</a></code></pre></div>
 <pre><code>## 
 ## 1:Northern Africa  2:Eastern Africa   3:Middle Africa 4:Southern Africa 
 ##                 6                16                 8                 5 
 ##  5:Western Africa 
 ##                16</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#now we run the model with Infant Mortality and Region as predictors</span>
-fit3 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <span class="op">~</span><span class="st"> </span>infant_mortality <span class="op">+</span><span class="st"> </span>newregion, <span class="dt">data=</span>data_<span class="dv">2000</span>)
-<span class="kw">summary</span>(fit3)</code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co">#now we run the model with Infant Mortality and Region as predictors</span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">fit3 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <span class="op">~</span><span class="st"> </span>infant_mortality <span class="op">+</span><span class="st"> </span>newregion, <span class="dt">data=</span>data_<span class="dv">2000</span>)</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="kw">summary</span>(fit3)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = life_expectancy ~ infant_mortality + newregion, 
@@ -670,8 +701,8 @@ fit3 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <s
 ## Residual standard error: 4.71 on 45 degrees of freedom
 ## Multiple R-squared:  0.721,  Adjusted R-squared:  0.6901 
 ## F-statistic: 23.26 on 5 and 45 DF,  p-value: 1.828e-11</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tidy</span>(fit3)</code></pre></div>
-<pre><code>## # A tibble: 6 x 5
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">tidy</span>(fit3)</a></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
 ##   term                       estimate std.error statistic  p.value
 ##   &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)                  77.9      2.19       35.6  1.29e-34
@@ -680,17 +711,14 @@ fit3 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <s
 ## 4 newregion3:Middle Africa     -7.93     3.01       -2.64 1.14e- 2
 ## 5 newregion4:Southern Africa  -15.0      2.94       -5.12 6.23e- 6
 ## 6 newregion5:Western Africa    -4.98     2.67       -1.86 6.91e- 2</code></pre>
-</div>
-<div id="interpretation" class="section level1">
-<h1>Interpretation</h1>
-<p>When controlling for region, we see that coefficient for infant mortality is significant at the 0.05 level. Among African countries, when controlling for region, for every one unit increase in infant mortality rate, there is a 0.18 decrease in life expectancy (p&lt;0.001). When controlling for infant mortality, we see that the categorical variable for region has sigificant mean differences in life expectancy when comparing East vs North (p&lt;0.001), Middle vs North (p=0.011), Southern vs North (p&lt;0.001). The p-value for the comparison between Western and North was 0.07 so we fail to reject the null and conclude no difference between these two regions</p>
+<p>#Interpretation When controlling for region, we see that coefficient for infant mortality is significant at the 0.05 level. Among African countries, when controlling for region, for every one unit increase in infant mortality rate, there is a 0.18 decrease in life expectancy (p&lt;0.001). When controlling for infant mortality, we see that the categorical variable for region has sigificant mean differences in life expectancy when comparing East vs North (p&lt;0.001), Middle vs North (p=0.011), Southern vs North (p&lt;0.001). The p-value for the comparison between Western and North was 0.07 so we fail to reject the null and conclude no difference between these two regions</p>
 <p>Now we look at a scatter plot and simple model of Gross Domestic Product and Life Expectancy</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#First I used ggplot to make a scatter plot of GPD (logscale) and Life Expectancy</span>
-<span class="kw">ggplot</span>(data_<span class="dv">2000</span>, <span class="kw">aes</span>(<span class="dt">x=</span>gdp, <span class="dt">y=</span>life_expectancy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Scatterplot of GDP and Life Expectancy Among African Countries&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;GDP (log scale)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Life Expectancy&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_log10</span>() </code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="co">#First I used ggplot to make a scatter plot of GPD (logscale) and Life Expectancy</span></a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw">ggplot</span>(data_<span class="dv">2000</span>, <span class="kw">aes</span>(<span class="dt">x=</span>gdp, <span class="dt">y=</span>life_expectancy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Scatterplot of GDP and Life Expectancy Among African Countries&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-3" data-line-number="3"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;GDP (log scale)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Life Expectancy&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_log10</span>() </a></code></pre></div>
 <p><img src="rcoding_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit4 &lt;-<span class="st"> </span><span class="kw">lm</span>(data_<span class="dv">2000</span><span class="op">$</span>life_expectancy <span class="op">~</span><span class="st"> </span>data_<span class="dv">2000</span><span class="op">$</span>gdp)
-<span class="kw">summary</span>(fit4)</code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">fit4 &lt;-<span class="st"> </span><span class="kw">lm</span>(data_<span class="dv">2000</span><span class="op">$</span>life_expectancy <span class="op">~</span><span class="st"> </span>data_<span class="dv">2000</span><span class="op">$</span>gdp)</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="kw">summary</span>(fit4)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = data_2000$life_expectancy ~ data_2000$gdp)
@@ -709,18 +737,14 @@ fit3 &lt;-<span class="st"> </span><span class="kw">lm</span>(life_expectancy <s
 ## Residual standard error: 8.043 on 49 degrees of freedom
 ## Multiple R-squared:  0.1144, Adjusted R-squared:  0.09632 
 ## F-statistic: 6.329 on 1 and 49 DF,  p-value: 0.0152</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
-<span class="kw">tidy</span>(fit4)</code></pre></div>
-<pre><code>## # A tibble: 2 x 5
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">library</span>(broom)</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="kw">tidy</span>(fit4)</a></code></pre></div>
+<pre><code>## # A tibble: 2 × 5
 ##   term          estimate std.error statistic  p.value
 ##   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)   5.50e+ 1  1.25e+ 0     44.1  4.21e-41
 ## 2 data_2000$gdp 1.17e-10  4.64e-11      2.52 1.52e- 2</code></pre>
-</div>
-<div id="interpretation-1" class="section level1">
-<h1>Interpretation</h1>
-<p>The results from the linear model show that the coefficient for gdp was significant at the 0.05 level. A one unit increase in GPD was asssociated with a 1.168e-10 increase in life expectancy (p=0.0152). While this association was statistically significant, the magnitude is still quite small.</p>
-</div>
+<p>#Interpretation The results from the linear model show that the coefficient for gdp was significant at the 0.05 level. A one unit increase in GPD was asssociated with a 1.168e-10 increase in life expectancy (p=0.0152). While this association was statistically significant, the magnitude is still quite small.</p>
 
 
 

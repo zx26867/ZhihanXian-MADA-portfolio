@@ -13,7 +13,7 @@
 
 <title>Tidy Tuesday</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/darkly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -341,12 +341,15 @@ $(document).ready(function () {
     <li>
       <a href="./tidytuesday.html">Tidy Tuesday</a>
     </li>
+    <li>
+      <a href="./tidytuesday_exercise2.html">Tidy Tuesday 2 Exercise</a>
+    </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://zx26867.github.io/ZhihanXian-MADA-portfolio/">
+  <a href="https://github.com/zx26867/ZhihanXian-MADA-portfolio">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -366,20 +369,12 @@ $(document).ready(function () {
 
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidytuesdayR)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">combo_df &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-28/combo_df.csv&#39;</span>,<span class="dt">show_col_types =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">combo_df</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">combo_df &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-28/combo_df.csv&#39;</span>,<span class="dt">show_col_types =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">combo_df</a></code></pre></div>
 <pre><code>## # A tibble: 130,081 × 12
 ##    paper catalogue_group  year month title     author name  user_nber user_repec
 ##    &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     
@@ -395,8 +390,8 @@ $(document).ready(function () {
 ## 10 w0009 General          1973     9 From Age… w0004… Lee … &lt;NA&gt;      pli669    
 ## # … with 130,071 more rows, and 3 more variables: program &lt;chr&gt;,
 ## #   program_desc &lt;chr&gt;, program_category &lt;chr&gt;</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># check for numeric range of variable year and month</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">summary</span>(combo_df)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># check for numeric range of variable year and month</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">summary</span>(combo_df)</a></code></pre></div>
 <pre><code>##     paper           catalogue_group         year          month       
 ##  Length:130081      Length:130081      Min.   :1973   Min.   : 1.000  
 ##  Class :character   Class :character   1st Qu.:2005   1st Qu.: 4.000  
@@ -418,13 +413,13 @@ $(document).ready(function () {
 ##                                                                             
 ##                                                                             
 ## </code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># The goal is to find out the top 20 productive authors in the past 2 decades</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">recent_data =<span class="st"> </span>combo_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">2001</span>)</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">author_ranking =<span class="st"> </span>recent_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(name) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Count =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Count))</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co"># top 20 author list and barchart</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">author_ranking[<span class="dv">0</span><span class="op">:</span><span class="dv">20</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># The goal is to find out the top 20 productive authors in the past 2 decades</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">recent_data =<span class="st"> </span>combo_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">2001</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">author_ranking =<span class="st"> </span>recent_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(name) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Count =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Count))</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># top 20 author list and barchart</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">author_ranking[<span class="dv">0</span><span class="op">:</span><span class="dv">20</span>,]</a></code></pre></div>
 <pre><code>## # A tibble: 20 × 2
 ##    name                Count
 ##    &lt;chr&gt;               &lt;int&gt;
@@ -448,18 +443,18 @@ $(document).ready(function () {
 ## 18 Joshua Aizenman       161
 ## 19 Stefano DellaVigna    161
 ## 20 John Van Reenen       155</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">data=</span>author_ranking[<span class="dv">0</span><span class="op">:</span><span class="dv">20</span>,], <span class="kw">aes</span>(<span class="dt">x=</span>name, <span class="dt">y=</span>Count)) <span class="op">+</span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">data=</span>author_ranking[<span class="dv">0</span><span class="op">:</span><span class="dv">20</span>,], <span class="kw">aes</span>(<span class="dt">x=</span>name, <span class="dt">y=</span>Count)) <span class="op">+</span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</a></code></pre></div>
 <p><img src="tidytuesday_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># The goal is to find out the top 10 programs contributing to the research in the past 2 decades</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co"># extract paper and program column</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">pg =<span class="st"> </span>recent_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(paper,program)</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co"># a paper may have multiple observations (rows), have to remove duplicates so we only count a contributing program once per paper</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">program_data =<span class="st"> </span>pg <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">distinct</span>()</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">program_ranking =<span class="st"> </span>program_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(program) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Count =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Count))</a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co"># top 10 program list</span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10">program_ranking[<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># The goal is to find out the top 10 programs contributing to the research in the past 2 decades</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># extract paper and program column</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">pg =<span class="st"> </span>recent_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(paper,program)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># a paper may have multiple observations (rows), have to remove duplicates so we only count a contributing program once per paper</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">program_data =<span class="st"> </span>pg <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">distinct</span>()</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">program_ranking =<span class="st"> </span>program_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(program) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Count =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Count))</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co"># top 10 program list</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">program_ranking[<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>,]</a></code></pre></div>
 <pre><code>## # A tibble: 10 × 2
 ##    program Count
 ##    &lt;chr&gt;   &lt;int&gt;
@@ -473,21 +468,21 @@ $(document).ready(function () {
 ##  8 CF       2136
 ##  9 PR       2017
 ## 10 ITI      1917</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">df2 &lt;-<span class="st"> </span>program_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(program) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Variable to be transformed</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">perc =</span> <span class="st">`</span><span class="dt">n</span><span class="st">`</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="st">`</span><span class="dt">n</span><span class="st">`</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="st">  </span><span class="kw">arrange</span>(perc) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">percent</span>(perc))</a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co"># make a piechart</span></a>
-<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="kw">ggplot</span>(df2, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span>perc, <span class="dt">fill=</span>program)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-12" data-line-number="12"><span class="st">  </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-14" data-line-number="14"><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> labels), <span class="dt">position =</span> <span class="kw">position_stack</span>(<span class="dt">vjust =</span> <span class="fl">0.5</span>), <span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">df2 &lt;-<span class="st"> </span>program_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(program) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Variable to be transformed</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">perc =</span> <span class="st">`</span><span class="dt">n</span><span class="st">`</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="st">`</span><span class="dt">n</span><span class="st">`</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="st">  </span><span class="kw">arrange</span>(perc) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">percent</span>(perc))</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co"># make a piechart</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="kw">ggplot</span>(df2, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span>perc, <span class="dt">fill=</span>program)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="st">  </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> labels), <span class="dt">position =</span> <span class="kw">position_stack</span>(<span class="dt">vjust =</span> <span class="fl">0.5</span>), <span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="tidytuesday_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
 
 
