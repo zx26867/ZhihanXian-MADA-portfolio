@@ -5,8 +5,314 @@ output:
     toc: FALSE
 ---
 
-to be filled
+
 
 ```{r warning=FALSE}
+library(tidytuesdayR)
+library(ggplot2) #for plotting
+library(broom) #for cleaning up output from lm()
+library(here) #for data loading/saving
+library(tidymodels) # for modeling
+library(tidyverse)
+library(ggplot2)
+library(rpart.plot)
+library(rpart)
+library(vip)
+library(glmnet)
+library(ranger)
+library(mlbench)
+library(kernlab)
+library(kknn)
+
+marbles <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-06-02/marbles.csv')
+
+select_data = marbles %>% select(c(site,marble_name,team_name,time_s,track_length_m,number_laps))
+final_data = select_data %>% drop_na()
+final_data$track_length_m = as.factor(final_data$track_length_m)
+final_data$number_laps = as.factor(final_data$number_laps)
+
+ggplot(final_data, aes(x=marble_name)) + geom_bar(fill = "black")
+ggplot(final_data, aes(x=team_name)) + geom_bar(fill = "black")
+ggplot(final_data, aes(x=site)) + geom_bar(fill = "black")
+#ggplot(final_data, aes(x=race)) + geom_bar(fill = "black")
+ggplot(final_data, aes(x=number_laps)) + geom_bar(fill = "black")
+ggplot(final_data, aes(x=track_length_m)) + geom_bar(fill = "black")
+
+set.seed(111)
+# Put 3/4 of the data into the training set
+data_split <- initial_split(final_data, prop = 3/4)
+
+# Create data frames for the two sets:
+train_data <- training(data_split)
+test_data  <- testing(data_split)
+
+set.seed(111)
+folds <- vfold_cv(train_data, v = 5, repeats = 5, strata = site)
+data_rec <- recipe(time_s ~ ., data = train_data) %>% step_dummy(all_nominal())
+
+################## decision tree model  #################
+tune_spec <- 
+  decision_tree(
+    cost_complexity = tune(),
+    tree_depth = tune()
+  ) %>% 
+  set_engine("rpart") %>% 
+  set_mode("regression")
+
+tune_spec
+
+tree_grid <- grid_regular(cost_complexity(),
+                          tree_depth(),
+                          levels = 5)
+
+tree_grid
+
+set.seed(111)
+
+tree_wf <- workflow() %>%
+  add_model(tune_spec) %>%
+  add_recipe(data_rec)
+
+tree_res <- 
+  tree_wf %>% 
+  tune_grid(
+    resamples = folds,
+    grid = tree_grid
+  )
+
+tree_res
+
+a = tree_res %>% collect_metrics()
+tree_res %>% autoplot()
+
+best_tree <- tree_res %>% select_best("rmse")
+
+best_tree
+
+final_wf <- tree_wf %>% finalize_workflow(best_tree)
+
+final_fit <- final_wf %>% fit(train_data) 
+
+df_tr <- final_fit %>% augment(train_data) %>% select(.pred, time_s) %>% mutate(residue = time_s - .pred)
+df_tr$id <- seq.int(nrow(df_tr))
+ggplot() + geom_point(data = df_tr, aes(x = id, y = time_s), color = "blue") + geom_point(data = df_tr, aes(x = id, y = .pred), color = "red") 
+# blue curve is the actual, red curve is predicted
+
+ggplot(df_tr, aes(x = id, y = residue)) + geom_point()
+# residue plots
+
+a = a %>% filter(.metric=="rmse") %>% arrange(mean)
+# best model
+a[1,]
+# best model rmse is 6.64
+
+
+
+########### LASSO MODEL ##############
+lr_mod <- linear_reg(penalty = tune(), mixture = 1) %>% set_engine("glmnet") %>% set_mode("regression")
+
+lr_workflow <- workflow() %>% add_model(lr_mod) %>% add_recipe(data_rec)
+
+lr_reg_grid <- tibble(penalty = 10^seq(-4, -1, length.out = 30))
+
+lr_res <- 
+  lr_workflow %>% 
+  tune_grid(resamples = folds,
+            grid = lr_reg_grid,
+            control = control_grid(save_pred = TRUE),
+            metrics = metric_set(rmse))
+
+b = lr_res %>% collect_metrics()
+lr_res %>% autoplot()
+
+best_lr <- lr_res %>% select_best("rmse")
+
+best_lr
+
+final_wf_lr <- lr_workflow %>% finalize_workflow(best_lr)
+
+final_fit_lr <- final_wf_lr %>% fit(train_data) 
+
+df_lr <- final_fit_lr %>% augment(train_data) %>% select(.pred, time_s) %>% mutate(residue = time_s - .pred)
+df_lr$id <- seq.int(nrow(df_lr))
+ggplot() + geom_point(data = df_lr, aes(x = id, y = time_s), color = "blue") + geom_point(data = df_lr, aes(x = id, y = .pred), color = "red")
+# blue curve is the actual, red curve is predicted
+
+ggplot(df_lr, aes(x = id, y = residue)) + geom_point()
+# residue plots
+
+b = b %>% filter(.metric=="rmse") %>% arrange(mean)
+# best model
+b[1,]
+# best model rmse is 6.15
+
+
+################ random forest model ###############
+cores <- parallel::detectCores()
+cores
+
+#rf_grid  <- expand.grid(mtry = c(3, 4, 5, 6), min_n = c(40,50,60))
+
+rf_mod <- 
+  rand_forest(mtry = tune(), min_n = tune(), trees = 1000) %>% 
+  set_engine("ranger", num.threads = cores) %>% 
+  set_mode("regression")
+
+rf_workflow <- 
+  workflow() %>% 
+  add_recipe(data_rec) %>% 
+  add_model(rf_mod) 
+
+set.seed(111)
+rf_res <- 
+  rf_workflow %>% 
+  tune_grid(resamples = folds,
+            grid = 25,
+            control = control_grid(save_pred = TRUE),
+            metrics = metric_set(rmse))
+
+c = rf_res %>% collect_metrics()
+rf_res %>% autoplot()
+
+best_rf <- rf_res %>% select_best("rmse")
+
+best_rf
+
+final_wf_rf <- rf_workflow %>% finalize_workflow(best_rf)
+
+final_fit_rf <- final_wf_rf %>% fit(train_data) 
+
+df_rf <- final_fit_rf %>% augment(train_data) %>% select(.pred, time_s) %>% mutate(residue = time_s - .pred)
+df_rf$id <- seq.int(nrow(df_rf))
+ggplot() + geom_point(data = df_rf, aes(x = id, y = time_s), color = "blue") + geom_point(data = df_rf, aes(x = id, y = .pred), color = "red")
+# blue curve is the actual, red curve is predicted
+
+ggplot(df_rf, aes(x = id, y = residue)) + geom_point()
+# residue plots
+
+c = c %>% filter(.metric=="rmse") %>% arrange(mean)
+# best model
+c[1,]
+# best model rmse is 3.00
+
+
+
+################ svm model ####################
+
+svm_mod <-
+  svm_rbf(cost = tune(), rbf_sigma = tune()) %>%
+  set_mode("regression") %>%
+  set_engine("kernlab")
+
+svm_rec <-
+  recipe(time_s ~ ., data = train_data)  %>%
+  # remove any zero variance predictors
+  step_zv(all_predictors()) %>% 
+  # remove any linear combinations
+  step_lincomb(all_numeric())
+
+svm_workflow <- 
+  workflow() %>% 
+  add_model(svm_mod) %>% 
+  add_recipe(data_rec)
+
+set.seed(111)
+recipe_res <-
+  svm_mod %>% 
+  tune_grid(
+    svm_rec,
+    resample = folds,
+    control = control_grid(save_pred = TRUE),
+    metrics = metric_set(rmse)
+  )
+
+show_best(recipe_res, metric = "rmse")
+
+d = recipe_res %>% collect_metrics()
+recipe_res %>% autoplot()
+
+best_svm <- recipe_res %>% select_best("rmse")
+
+best_svm
+
+final_wf_svm <- svm_workflow %>% finalize_workflow(best_svm)
+
+final_fit_svm <- final_wf_svm %>% fit(train_data) 
+
+df_svm <- final_fit_svm %>% augment(train_data) %>% select(.pred, time_s) %>% mutate(residue = time_s - .pred)
+df_svm$id <- seq.int(nrow(df_svm))
+ggplot() + geom_point(data = df_svm, aes(x = id, y = time_s), color = "blue") + geom_point(data = df_svm, aes(x = id, y = .pred), color = "red")
+# blue curve is the actual, red curve is predicted
+
+ggplot(df_svm, aes(x = id, y = residue)) + geom_point()
+# residue plots
+
+d = d %>% filter(.metric=="rmse") %>% arrange(mean)
+# best model
+d[1,]
+# best model rmse is 230.84
+
+
+################# knn model #########################
+
+knn_recipe <- data_rec %>% step_scale(all_predictors()) %>% step_center(all_predictors())
+
+knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = tune()) %>% set_engine("kknn") %>% set_mode("regression")
+knn_wkflw <- workflow() %>% add_recipe(knn_recipe) %>% add_model(knn_spec)
+
+gridvals <- tibble(neighbors = seq(from = 1, to = 20, by = 1))
+
+knn_results <- knn_wkflw %>% tune_grid(resamples = folds, grid = gridvals)
+
+show_best(knn_results, metric = "rmse")
+
+e = knn_results %>% collect_metrics()
+knn_results %>% autoplot()
+
+best_knn <- knn_results %>% select_best("rmse")
+
+best_knn
+
+final_wf_knn <- knn_wkflw %>% finalize_workflow(best_knn)
+
+final_fit_knn <- final_wf_knn %>% fit(train_data) 
+
+df_knn <- final_fit_knn %>% augment(train_data) %>% select(.pred, time_s) %>% mutate(residue = time_s - .pred)
+df_knn$id <- seq.int(nrow(df_knn))
+ggplot() + geom_point(data = df_knn, aes(x = id, y = time_s), color = "blue") + geom_point(data = df_knn, aes(x = id, y = .pred), color = "red")
+# blue curve is the actual, red curve is predicted
+
+ggplot(df_knn, aes(x = id, y = residue)) + geom_point()
+# residue plots
+
+# best model
+e = e %>% filter(.metric=="rmse") %>% arrange(mean)
+e[1,]
+# best model rmse is 93.57
+
+
+
+############### Model Selection #################
+
+# Obviously, random forest, LASSO and decision tree model have the best model performance, since their rmse range from only 3 to 6. Compared with these three models, the rmse values for knn and svm are too big (93 and 230). Therefore, random forest model is selected since it has the smallest rmse and comparable model complexity as LASSO or decision tree.
+
+
+################ Final Fit ################
+# I picked random forest model
+
+last_fit <- final_wf_rf %>% fit(test_data) 
+df_rf_last <- last_fit %>% augment(test_data) %>% select(.pred, time_s) %>% mutate(residue = time_s - .pred)
+df_rf_last$id <- seq.int(nrow(df_rf_last))
+
+ggplot() + geom_point(data = df_rf_last, aes(x = id, y = time_s), color = "blue") + geom_point(data = df_rf_last, aes(x = id, y = .pred), color = "red")
+# blue curve is the actual, red curve is predicted
+
+ggplot(df_rf_last, aes(x = id, y = residue)) + geom_point()
+df_rf_last %>% rmse(truth=time_s,.pred)
+# final rmse is 4.79, slightly greater than the training sets
+
 
 ```
+Summary
+
+I attempted to use site, marble_name, team_name, track_length_m and number_laps to predict time_s. I tried 5 ML models: LASSO, decision tree, svm, knn, and random forest. Model fitting showed random forest has the best performance, as the rmse for training set is 3.00. After fitting the testing set, the rmse is 4.79. 

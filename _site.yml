@@ -21,6 +21,8 @@ navbar:
           href: ./tidytuesday.html
         - text: "Tidy Tuesday 2 Exercise"
           href: ./tidytuesday_exercise2.html
+        - text: "Flu Data Analysis"
+          href: ./analysis_module11.html
 
   right:
     - icon: fa-github fa-lg
