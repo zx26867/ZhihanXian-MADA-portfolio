@@ -374,7 +374,6 @@ $(document).ready(function () {
 </div>
 
 
-<p>full analysis link: <a href="https://github.com/zx26867/ZhihanXian-MADA-analysis3" class="uri">https://github.com/zx26867/ZhihanXian-MADA-analysis3</a></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#load needed packages. make sure they are installed.</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(readxl) <span class="co">#for loading Excel files</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(dplyr) <span class="co">#for data processing</span></a></code></pre></div>
@@ -416,7 +415,7 @@ $(document).ready(function () {
 ## x dplyr::lag()      masks stats::lag()
 ## x yardstick::spec() masks readr::spec()
 ## x recipes::step()   masks stats::step()
-## • Search for functions across packages at https://www.tidymodels.org/find/</code></pre>
+## • Dig deeper into tidy modeling with R at https://www.tmwr.org</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">library</span>(rpart.plot)</a></code></pre></div>
 <pre><code>## Loading required package: rpart</code></pre>
 <pre><code>## 
@@ -431,7 +430,7 @@ $(document).ready(function () {
 <pre><code>## The following object is masked from &#39;package:utils&#39;:
 ## 
 ##     vi</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">library</span>(glmnet)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">library</span>(glmnet) </a></code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;Matrix&#39;</code></pre>
@@ -442,7 +441,7 @@ $(document).ready(function () {
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">library</span>(ranger)</a>
 <a class="sourceLine" id="cb28-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb28-3" data-line-number="3"><span class="co">#path to data</span></a>
-<a class="sourceLine" id="cb28-4" data-line-number="4">data_location &lt;-<span class="st"> </span>here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;files&quot;</span>,<span class="st">&quot;processeddata_m11.rds&quot;</span>)</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">data_location &lt;-<span class="st"> </span>here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;files&quot;</span>, <span class="st">&quot;processeddata_m11.rds&quot;</span>)</a>
 <a class="sourceLine" id="cb28-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb28-6" data-line-number="6"><span class="co">#load data. </span></a>
 <a class="sourceLine" id="cb28-7" data-line-number="7">mydata &lt;-<span class="st"> </span><span class="kw">readRDS</span>(data_location)</a>
@@ -533,7 +532,7 @@ $(document).ready(function () {
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co">#tree_grid %&gt;% count(tree_depth)</span></a>
 <a class="sourceLine" id="cb38-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb38-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb38-4" data-line-number="4">cv_folds &lt;-<span class="st"> </span><span class="kw">vfold_cv</span>(train_data)</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="co">#cv_folds &lt;- vfold_cv(train_data)</span></a>
 <a class="sourceLine" id="cb38-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb38-6" data-line-number="6"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
 <a class="sourceLine" id="cb38-7" data-line-number="7"></a>
@@ -544,236 +543,244 @@ $(document).ready(function () {
 <a class="sourceLine" id="cb38-12" data-line-number="12">tree_res &lt;-<span class="st"> </span></a>
 <a class="sourceLine" id="cb38-13" data-line-number="13"><span class="st">  </span>tree_wf <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb38-14" data-line-number="14"><span class="st">  </span><span class="kw">tune_grid</span>(</a>
-<a class="sourceLine" id="cb38-15" data-line-number="15">    <span class="dt">resamples =</span> cv_folds,</a>
+<a class="sourceLine" id="cb38-15" data-line-number="15">    <span class="dt">resamples =</span> folds,</a>
 <a class="sourceLine" id="cb38-16" data-line-number="16">    <span class="dt">grid =</span> tree_grid</a>
 <a class="sourceLine" id="cb38-17" data-line-number="17">    )</a></code></pre></div>
-<pre><code>## ! Fold01: internal: A correlation computation is required, but `estimate` is const...</code></pre>
-<pre><code>## ! Fold02: internal: A correlation computation is required, but `estimate` is const...</code></pre>
-<pre><code>## ! Fold03: internal: A correlation computation is required, but `estimate` is const...</code></pre>
-<pre><code>## ! Fold04: internal: A correlation computation is required, but `estimate` is const...</code></pre>
-<pre><code>## ! Fold05: internal: A correlation computation is required, but `estimate` is const...</code></pre>
-<pre><code>## ! Fold06: internal: A correlation computation is required, but `estimate` is const...</code></pre>
-<pre><code>## ! Fold07: internal: A correlation computation is required, but `estimate` is const...</code></pre>
-<pre><code>## ! Fold08: internal: A correlation computation is required, but `estimate` is const...</code></pre>
-<pre><code>## ! Fold09: internal: A correlation computation is required, but `estimate` is const...</code></pre>
-<pre><code>## ! Fold10: internal: A correlation computation is required, but `estimate` is const...</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">tree_res</a></code></pre></div>
+<pre><code>## ! Fold1, Repeat1: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold2, Repeat1: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold3, Repeat1: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold4, Repeat1: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold5, Repeat1: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold1, Repeat2: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold2, Repeat2: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold3, Repeat2: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold4, Repeat2: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold5, Repeat2: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold1, Repeat3: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold2, Repeat3: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold3, Repeat3: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold4, Repeat3: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold5, Repeat3: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold1, Repeat4: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold2, Repeat4: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold3, Repeat4: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold4, Repeat4: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold5, Repeat4: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold1, Repeat5: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold2, Repeat5: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold3, Repeat5: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold4, Repeat5: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<pre><code>## ! Fold5, Repeat5: internal: A correlation computation is required, but `estimate` is const...</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">tree_res</a></code></pre></div>
 <pre><code>## Warning: This tuning result has notes. Example notes on model fitting include:
 ## internal: A correlation computation is required, but `estimate` is constant and has 0 standard deviation, resulting in a divide by 0 error. `NA` will be returned.
 ## internal: A correlation computation is required, but `estimate` is constant and has 0 standard deviation, resulting in a divide by 0 error. `NA` will be returned.
 ## internal: A correlation computation is required, but `estimate` is constant and has 0 standard deviation, resulting in a divide by 0 error. `NA` will be returned.</code></pre>
 <pre><code>## # Tuning results
-## # 10-fold cross-validation 
-## # A tibble: 10 × 4
-##    splits           id     .metrics          .notes          
-##    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;            &lt;list&gt;          
-##  1 &lt;split [365/41]&gt; Fold01 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
-##  2 &lt;split [365/41]&gt; Fold02 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
-##  3 &lt;split [365/41]&gt; Fold03 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
-##  4 &lt;split [365/41]&gt; Fold04 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
-##  5 &lt;split [365/41]&gt; Fold05 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
-##  6 &lt;split [365/41]&gt; Fold06 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
-##  7 &lt;split [366/40]&gt; Fold07 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
-##  8 &lt;split [366/40]&gt; Fold08 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
-##  9 &lt;split [366/40]&gt; Fold09 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
-## 10 &lt;split [366/40]&gt; Fold10 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">a =<span class="st"> </span>tree_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect_metrics</span>()</a>
-<a class="sourceLine" id="cb52-2" data-line-number="2">tree_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
+## # 5-fold cross-validation repeated 5 times using stratification 
+## # A tibble: 25 × 5
+##    splits           id      id2   .metrics          .notes          
+##    &lt;list&gt;           &lt;chr&gt;   &lt;chr&gt; &lt;list&gt;            &lt;list&gt;          
+##  1 &lt;split [323/83]&gt; Repeat1 Fold1 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
+##  2 &lt;split [323/83]&gt; Repeat1 Fold2 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
+##  3 &lt;split [325/81]&gt; Repeat1 Fold3 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
+##  4 &lt;split [326/80]&gt; Repeat1 Fold4 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
+##  5 &lt;split [327/79]&gt; Repeat1 Fold5 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
+##  6 &lt;split [323/83]&gt; Repeat2 Fold1 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
+##  7 &lt;split [323/83]&gt; Repeat2 Fold2 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
+##  8 &lt;split [325/81]&gt; Repeat2 Fold3 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
+##  9 &lt;split [326/80]&gt; Repeat2 Fold4 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
+## 10 &lt;split [327/79]&gt; Repeat2 Fold5 &lt;tibble [50 × 6]&gt; &lt;tibble [1 × 1]&gt;
+## # … with 15 more rows</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">a =<span class="st"> </span>tree_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect_metrics</span>()</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">tree_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">best_tree &lt;-<span class="st"> </span>tree_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_best</span>(<span class="st">&quot;rmse&quot;</span>)</a>
-<a class="sourceLine" id="cb53-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb53-3" data-line-number="3">best_tree</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">best_tree &lt;-<span class="st"> </span>tree_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_best</span>(<span class="st">&quot;rmse&quot;</span>)</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb68-3" data-line-number="3">best_tree</a></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   cost_complexity tree_depth .config              
 ##             &lt;dbl&gt;      &lt;int&gt; &lt;chr&gt;                
 ## 1    0.0000000001          1 Preprocessor1_Model01</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">final_wf &lt;-<span class="st"> </span>tree_wf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">finalize_workflow</span>(best_tree)</a>
-<a class="sourceLine" id="cb55-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb55-3" data-line-number="3">final_fit &lt;-<span class="st"> </span>final_wf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(train_data) </a>
-<a class="sourceLine" id="cb55-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb55-5" data-line-number="5">df &lt;-<span class="st"> </span>final_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>(train_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(.pred, BodyTemp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">residue =</span> BodyTemp <span class="op">-</span><span class="st"> </span>.pred)</a>
-<a class="sourceLine" id="cb55-6" data-line-number="6">df<span class="op">$</span>id &lt;-<span class="st"> </span><span class="kw">seq.int</span>(<span class="kw">nrow</span>(df))</a>
-<a class="sourceLine" id="cb55-7" data-line-number="7"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> BodyTemp), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> .pred), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">final_wf &lt;-<span class="st"> </span>tree_wf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">finalize_workflow</span>(best_tree)</a>
+<a class="sourceLine" id="cb70-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb70-3" data-line-number="3">final_fit &lt;-<span class="st"> </span>final_wf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(train_data) </a>
+<a class="sourceLine" id="cb70-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb70-5" data-line-number="5">df &lt;-<span class="st"> </span>final_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>(train_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(.pred, BodyTemp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">residue =</span> BodyTemp <span class="op">-</span><span class="st"> </span>.pred)</a>
+<a class="sourceLine" id="cb70-6" data-line-number="6">df<span class="op">$</span>id &lt;-<span class="st"> </span><span class="kw">seq.int</span>(<span class="kw">nrow</span>(df))</a>
+<a class="sourceLine" id="cb70-7" data-line-number="7"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> BodyTemp), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> .pred), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="co"># blue curve is the actual, red curve is predicted</span></a>
-<a class="sourceLine" id="cb58-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb58-3" data-line-number="3"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> residue)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="co"># blue curve is the actual, red curve is predicted</span></a>
+<a class="sourceLine" id="cb71-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> residue)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-3.png" width="672" /></p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="co"># residue plots, clearly shows a pattern, which is not good</span></a>
-<a class="sourceLine" id="cb59-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb59-3" data-line-number="3">a =<span class="st"> </span>a <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(.metric<span class="op">==</span><span class="st">&quot;rmse&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(mean)</a>
-<a class="sourceLine" id="cb59-4" data-line-number="4">a</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="co"># residue plots, clearly shows a pattern, which is not good</span></a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3">a =<span class="st"> </span>a <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(.metric<span class="op">==</span><span class="st">&quot;rmse&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(mean)</a>
+<a class="sourceLine" id="cb72-4" data-line-number="4">a</a></code></pre></div>
 <pre><code>## # A tibble: 25 × 8
 ##    cost_complexity tree_depth .metric .estimator  mean     n std_err .config    
 ##              &lt;dbl&gt;      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;      
-##  1    0.0000000001          1 rmse    standard    1.19    10  0.0498 Preprocess…
-##  2    0.0000000178          1 rmse    standard    1.19    10  0.0498 Preprocess…
-##  3    0.00000316            1 rmse    standard    1.19    10  0.0498 Preprocess…
-##  4    0.000562              1 rmse    standard    1.19    10  0.0498 Preprocess…
-##  5    0.1                   1 rmse    standard    1.21    10  0.0471 Preprocess…
-##  6    0.1                   4 rmse    standard    1.21    10  0.0471 Preprocess…
-##  7    0.1                   8 rmse    standard    1.21    10  0.0471 Preprocess…
-##  8    0.1                  11 rmse    standard    1.21    10  0.0471 Preprocess…
-##  9    0.1                  15 rmse    standard    1.21    10  0.0471 Preprocess…
-## 10    0.0000000001          4 rmse    standard    1.30    10  0.0518 Preprocess…
+##  1    0.0000000001          1 rmse    standard    1.21    25  0.0258 Preprocess…
+##  2    0.0000000178          1 rmse    standard    1.21    25  0.0258 Preprocess…
+##  3    0.00000316            1 rmse    standard    1.21    25  0.0258 Preprocess…
+##  4    0.000562              1 rmse    standard    1.21    25  0.0258 Preprocess…
+##  5    0.1                   1 rmse    standard    1.21    25  0.0256 Preprocess…
+##  6    0.1                   4 rmse    standard    1.21    25  0.0256 Preprocess…
+##  7    0.1                   8 rmse    standard    1.21    25  0.0256 Preprocess…
+##  8    0.1                  11 rmse    standard    1.21    25  0.0256 Preprocess…
+##  9    0.1                  15 rmse    standard    1.21    25  0.0256 Preprocess…
+## 10    0.0000000001          4 rmse    standard    1.27    25  0.0256 Preprocess…
 ## # … with 15 more rows</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="co"># best model rmse is 1.19, std is 0.0498, the null model rmse is 1.22, std = 0. Thus, the model is not that useful.</span></a>
-<a class="sourceLine" id="cb61-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb61-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb61-4" data-line-number="4"><span class="co">############# LASSO model ##############</span></a>
-<a class="sourceLine" id="cb61-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb61-6" data-line-number="6">lr_mod &lt;-<span class="st"> </span><span class="kw">linear_reg</span>(<span class="dt">penalty =</span> <span class="kw">tune</span>(), <span class="dt">mixture =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">set_engine</span>(<span class="st">&quot;glmnet&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</a>
-<a class="sourceLine" id="cb61-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb61-8" data-line-number="8">lr_workflow &lt;-<span class="st"> </span><span class="kw">workflow</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_model</span>(lr_mod) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_recipe</span>(data_rec)</a>
-<a class="sourceLine" id="cb61-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb61-10" data-line-number="10">lr_reg_grid &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">penalty =</span> <span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">-1</span>, <span class="dt">length.out =</span> <span class="dv">30</span>))</a>
-<a class="sourceLine" id="cb61-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb61-12" data-line-number="12">lr_res &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb61-13" data-line-number="13"><span class="st">  </span>lr_workflow <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb61-14" data-line-number="14"><span class="st">  </span><span class="kw">tune_grid</span>(<span class="dt">resamples =</span> cv_folds,</a>
-<a class="sourceLine" id="cb61-15" data-line-number="15">            <span class="dt">grid =</span> lr_reg_grid,</a>
-<a class="sourceLine" id="cb61-16" data-line-number="16">            <span class="dt">control =</span> <span class="kw">control_grid</span>(<span class="dt">save_pred =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb61-17" data-line-number="17">            <span class="dt">metrics =</span> <span class="kw">metric_set</span>(rmse))</a>
-<a class="sourceLine" id="cb61-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb61-19" data-line-number="19">b =<span class="st"> </span>lr_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect_metrics</span>()</a>
-<a class="sourceLine" id="cb61-20" data-line-number="20">lr_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="co"># best model rmse is 1.21, std is 0.0258, the null model rmse is 1.22, std = 0. Thus, the model is not that useful.</span></a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb74-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb74-4" data-line-number="4"><span class="co">############# LASSO model ##############</span></a>
+<a class="sourceLine" id="cb74-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb74-6" data-line-number="6">lr_mod &lt;-<span class="st"> </span><span class="kw">linear_reg</span>(<span class="dt">penalty =</span> <span class="kw">tune</span>(), <span class="dt">mixture =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">set_engine</span>(<span class="st">&quot;glmnet&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</a>
+<a class="sourceLine" id="cb74-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb74-8" data-line-number="8">lr_workflow &lt;-<span class="st"> </span><span class="kw">workflow</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_model</span>(lr_mod) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_recipe</span>(data_rec)</a>
+<a class="sourceLine" id="cb74-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb74-10" data-line-number="10">lr_reg_grid &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">penalty =</span> <span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">-1</span>, <span class="dt">length.out =</span> <span class="dv">30</span>))</a>
+<a class="sourceLine" id="cb74-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb74-12" data-line-number="12">lr_res &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb74-13" data-line-number="13"><span class="st">  </span>lr_workflow <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb74-14" data-line-number="14"><span class="st">  </span><span class="kw">tune_grid</span>(<span class="dt">resamples =</span> folds,</a>
+<a class="sourceLine" id="cb74-15" data-line-number="15">            <span class="dt">grid =</span> lr_reg_grid,</a>
+<a class="sourceLine" id="cb74-16" data-line-number="16">            <span class="dt">control =</span> <span class="kw">control_grid</span>(<span class="dt">save_pred =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb74-17" data-line-number="17">            <span class="dt">metrics =</span> <span class="kw">metric_set</span>(rmse))</a>
+<a class="sourceLine" id="cb74-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb74-19" data-line-number="19">b =<span class="st"> </span>lr_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect_metrics</span>()</a>
+<a class="sourceLine" id="cb74-20" data-line-number="20">lr_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-4.png" width="672" /></p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">best_lr &lt;-<span class="st"> </span>lr_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_best</span>(<span class="st">&quot;rmse&quot;</span>)</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb62-3" data-line-number="3">best_lr</a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1">best_lr &lt;-<span class="st"> </span>lr_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_best</span>(<span class="st">&quot;rmse&quot;</span>)</a>
+<a class="sourceLine" id="cb75-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb75-3" data-line-number="3">best_lr</a></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   penalty .config              
 ##     &lt;dbl&gt; &lt;chr&gt;                
 ## 1  0.0788 Preprocessor1_Model29</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">final_wf_lr &lt;-<span class="st"> </span>lr_workflow <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">finalize_workflow</span>(best_lr)</a>
-<a class="sourceLine" id="cb64-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb64-3" data-line-number="3">final_fit_lr &lt;-<span class="st"> </span>final_wf_lr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(train_data) </a>
-<a class="sourceLine" id="cb64-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb64-5" data-line-number="5">df_lr &lt;-<span class="st"> </span>final_fit_lr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>(train_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(.pred, BodyTemp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">residue =</span> BodyTemp <span class="op">-</span><span class="st"> </span>.pred)</a>
-<a class="sourceLine" id="cb64-6" data-line-number="6">df_lr<span class="op">$</span>id &lt;-<span class="st"> </span><span class="kw">seq.int</span>(<span class="kw">nrow</span>(df_lr))</a>
-<a class="sourceLine" id="cb64-7" data-line-number="7"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> df_lr, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> BodyTemp), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> df_lr, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> .pred), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;
-## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">final_wf_lr &lt;-<span class="st"> </span>lr_workflow <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">finalize_workflow</span>(best_lr)</a>
+<a class="sourceLine" id="cb77-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb77-3" data-line-number="3">final_fit_lr &lt;-<span class="st"> </span>final_wf_lr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(train_data) </a>
+<a class="sourceLine" id="cb77-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb77-5" data-line-number="5">df_lr &lt;-<span class="st"> </span>final_fit_lr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>(train_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(.pred, BodyTemp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">residue =</span> BodyTemp <span class="op">-</span><span class="st"> </span>.pred)</a>
+<a class="sourceLine" id="cb77-6" data-line-number="6">df_lr<span class="op">$</span>id &lt;-<span class="st"> </span><span class="kw">seq.int</span>(<span class="kw">nrow</span>(df_lr))</a>
+<a class="sourceLine" id="cb77-7" data-line-number="7"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df_lr, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> BodyTemp), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df_lr, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> .pred), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-5.png" width="672" /></p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co"># blue curve is the actual, red curve is predicted</span></a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb66-3" data-line-number="3"><span class="kw">ggplot</span>(df_lr, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> residue)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="co"># blue curve is the actual, red curve is predicted</span></a>
+<a class="sourceLine" id="cb78-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="kw">ggplot</span>(df_lr, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> residue)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-6.png" width="672" /></p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="co"># residue plots, clearly shows a pattern, which is not good</span></a>
-<a class="sourceLine" id="cb67-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb67-3" data-line-number="3">b =<span class="st"> </span>b <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(.metric<span class="op">==</span><span class="st">&quot;rmse&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(mean)</a>
-<a class="sourceLine" id="cb67-4" data-line-number="4">b</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="co"># residue plots, clearly shows a pattern, which is not good</span></a>
+<a class="sourceLine" id="cb79-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb79-3" data-line-number="3">b =<span class="st"> </span>b <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(.metric<span class="op">==</span><span class="st">&quot;rmse&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(mean)</a>
+<a class="sourceLine" id="cb79-4" data-line-number="4">b</a></code></pre></div>
 <pre><code>## # A tibble: 30 × 7
 ##    penalty .metric .estimator  mean     n std_err .config              
 ##      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;                
-##  1  0.0788 rmse    standard    1.19    10  0.0505 Preprocessor1_Model29
-##  2  0.0621 rmse    standard    1.19    10  0.0523 Preprocessor1_Model28
-##  3  0.1    rmse    standard    1.19    10  0.0490 Preprocessor1_Model30
-##  4  0.0489 rmse    standard    1.19    10  0.0539 Preprocessor1_Model27
-##  5  0.0386 rmse    standard    1.19    10  0.0550 Preprocessor1_Model26
-##  6  0.0304 rmse    standard    1.19    10  0.0562 Preprocessor1_Model25
-##  7  0.0240 rmse    standard    1.20    10  0.0572 Preprocessor1_Model24
-##  8  0.0189 rmse    standard    1.20    10  0.0579 Preprocessor1_Model23
-##  9  0.0149 rmse    standard    1.20    10  0.0583 Preprocessor1_Model22
-## 10  0.0117 rmse    standard    1.21    10  0.0587 Preprocessor1_Model21
+##  1  0.0788 rmse    standard    1.19    25  0.0258 Preprocessor1_Model29
+##  2  0.0621 rmse    standard    1.19    25  0.0260 Preprocessor1_Model28
+##  3  0.1    rmse    standard    1.19    25  0.0256 Preprocessor1_Model30
+##  4  0.0489 rmse    standard    1.19    25  0.0261 Preprocessor1_Model27
+##  5  0.0386 rmse    standard    1.19    25  0.0261 Preprocessor1_Model26
+##  6  0.0304 rmse    standard    1.19    25  0.0262 Preprocessor1_Model25
+##  7  0.0240 rmse    standard    1.20    25  0.0263 Preprocessor1_Model24
+##  8  0.0189 rmse    standard    1.20    25  0.0264 Preprocessor1_Model23
+##  9  0.0149 rmse    standard    1.20    25  0.0265 Preprocessor1_Model22
+## 10  0.0117 rmse    standard    1.20    25  0.0265 Preprocessor1_Model21
 ## # … with 20 more rows</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="co"># best model rmse is 1.19, std is 0.0505, the null model rmse is 1.22, std = 0. Thus, the model seems to perform the same as the tree model above.</span></a>
-<a class="sourceLine" id="cb69-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb69-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb69-4" data-line-number="4"><span class="co">################ random forest model ###############</span></a>
-<a class="sourceLine" id="cb69-5" data-line-number="5">cores &lt;-<span class="st"> </span>parallel<span class="op">::</span><span class="kw">detectCores</span>()</a>
-<a class="sourceLine" id="cb69-6" data-line-number="6">cores</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="co"># best model rmse is 1.19, std is 0.0258, the null model rmse is 1.22, std = 0. Thus, the model seems to perform the same as the tree model above.</span></a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb81-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb81-4" data-line-number="4"><span class="co">################ random forest model ###############</span></a>
+<a class="sourceLine" id="cb81-5" data-line-number="5">cores &lt;-<span class="st"> </span>parallel<span class="op">::</span><span class="kw">detectCores</span>()</a>
+<a class="sourceLine" id="cb81-6" data-line-number="6">cores</a></code></pre></div>
 <pre><code>## [1] 8</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">rf_mod &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="st">  </span><span class="kw">rand_forest</span>(<span class="dt">mtry =</span> <span class="kw">tune</span>(), <span class="dt">min_n =</span> <span class="kw">tune</span>(), <span class="dt">trees =</span> <span class="dv">1000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;ranger&quot;</span>, <span class="dt">num.threads =</span> cores) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb71-4" data-line-number="4"><span class="st">  </span><span class="kw">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</a>
-<a class="sourceLine" id="cb71-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb71-6" data-line-number="6">rf_workflow &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb71-7" data-line-number="7"><span class="st">  </span><span class="kw">workflow</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb71-8" data-line-number="8"><span class="st">  </span><span class="kw">add_model</span>(rf_mod) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb71-9" data-line-number="9"><span class="st">  </span><span class="kw">add_recipe</span>(data_rec)</a>
-<a class="sourceLine" id="cb71-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb71-11" data-line-number="11"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb71-12" data-line-number="12">rf_res &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb71-13" data-line-number="13"><span class="st">  </span>rf_workflow <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb71-14" data-line-number="14"><span class="st">  </span><span class="kw">tune_grid</span>(<span class="dt">resamples =</span> cv_folds,</a>
-<a class="sourceLine" id="cb71-15" data-line-number="15">            <span class="dt">grid =</span> <span class="dv">25</span>,</a>
-<a class="sourceLine" id="cb71-16" data-line-number="16">            <span class="dt">control =</span> <span class="kw">control_grid</span>(<span class="dt">save_pred =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb71-17" data-line-number="17">            <span class="dt">metrics =</span> <span class="kw">metric_set</span>(rmse))</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">rf_mod &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="st">  </span><span class="kw">rand_forest</span>(<span class="dt">mtry =</span> <span class="kw">tune</span>(), <span class="dt">min_n =</span> <span class="kw">tune</span>(), <span class="dt">trees =</span> <span class="dv">1000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-3" data-line-number="3"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;ranger&quot;</span>, <span class="dt">num.threads =</span> cores) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-4" data-line-number="4"><span class="st">  </span><span class="kw">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</a>
+<a class="sourceLine" id="cb83-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb83-6" data-line-number="6">rf_workflow &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb83-7" data-line-number="7"><span class="st">  </span><span class="kw">workflow</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-8" data-line-number="8"><span class="st">  </span><span class="kw">add_model</span>(rf_mod) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-9" data-line-number="9"><span class="st">  </span><span class="kw">add_recipe</span>(data_rec)</a>
+<a class="sourceLine" id="cb83-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb83-11" data-line-number="11"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb83-12" data-line-number="12">rf_res &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb83-13" data-line-number="13"><span class="st">  </span>rf_workflow <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-14" data-line-number="14"><span class="st">  </span><span class="kw">tune_grid</span>(<span class="dt">resamples =</span> folds,</a>
+<a class="sourceLine" id="cb83-15" data-line-number="15">            <span class="dt">grid =</span> <span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb83-16" data-line-number="16">            <span class="dt">control =</span> <span class="kw">control_grid</span>(<span class="dt">save_pred =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb83-17" data-line-number="17">            <span class="dt">metrics =</span> <span class="kw">metric_set</span>(rmse))</a></code></pre></div>
 <pre><code>## i Creating pre-processing data to finalize unknown parameter: mtry</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">c =<span class="st"> </span>rf_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect_metrics</span>()</a>
-<a class="sourceLine" id="cb73-2" data-line-number="2">rf_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">c =<span class="st"> </span>rf_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect_metrics</span>()</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2">rf_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-7.png" width="672" /></p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">best_rf &lt;-<span class="st"> </span>rf_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_best</span>(<span class="st">&quot;rmse&quot;</span>)</a>
-<a class="sourceLine" id="cb74-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb74-3" data-line-number="3">best_rf</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">best_rf &lt;-<span class="st"> </span>rf_res <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_best</span>(<span class="st">&quot;rmse&quot;</span>)</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb86-3" data-line-number="3">best_rf</a></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##    mtry min_n .config              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt;                
 ## 1     2    33 Preprocessor1_Model10</code></pre>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">final_wf_rf &lt;-<span class="st"> </span>rf_workflow <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">finalize_workflow</span>(best_rf)</a>
-<a class="sourceLine" id="cb76-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb76-3" data-line-number="3">final_fit_rf &lt;-<span class="st"> </span>final_wf_rf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(train_data) </a>
-<a class="sourceLine" id="cb76-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb76-5" data-line-number="5">df_rf &lt;-<span class="st"> </span>final_fit_rf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>(train_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(.pred, BodyTemp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">residue =</span> BodyTemp <span class="op">-</span><span class="st"> </span>.pred)</a>
-<a class="sourceLine" id="cb76-6" data-line-number="6">df_rf<span class="op">$</span>id &lt;-<span class="st"> </span><span class="kw">seq.int</span>(<span class="kw">nrow</span>(df_rf))</a>
-<a class="sourceLine" id="cb76-7" data-line-number="7"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> df_rf, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> BodyTemp), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> df_rf, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> .pred), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;
-## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">final_wf_rf &lt;-<span class="st"> </span>rf_workflow <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">finalize_workflow</span>(best_rf)</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb88-3" data-line-number="3">final_fit_rf &lt;-<span class="st"> </span>final_wf_rf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(train_data) </a>
+<a class="sourceLine" id="cb88-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb88-5" data-line-number="5">df_rf &lt;-<span class="st"> </span>final_fit_rf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>(train_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(.pred, BodyTemp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">residue =</span> BodyTemp <span class="op">-</span><span class="st"> </span>.pred)</a>
+<a class="sourceLine" id="cb88-6" data-line-number="6">df_rf<span class="op">$</span>id &lt;-<span class="st"> </span><span class="kw">seq.int</span>(<span class="kw">nrow</span>(df_rf))</a>
+<a class="sourceLine" id="cb88-7" data-line-number="7"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df_rf, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> BodyTemp), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df_rf, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> .pred), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-8.png" width="672" /></p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="co"># blue curve is the actual, red curve is predicted</span></a>
-<a class="sourceLine" id="cb78-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="kw">ggplot</span>(df_rf, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> residue)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="co"># blue curve is the actual, red curve is predicted</span></a>
+<a class="sourceLine" id="cb89-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb89-3" data-line-number="3"><span class="kw">ggplot</span>(df_rf, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> residue)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-9.png" width="672" /></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="co"># residue plots, clearly shows a pattern, which is not good</span></a>
-<a class="sourceLine" id="cb79-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb79-3" data-line-number="3">c =<span class="st"> </span>c <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(.metric<span class="op">==</span><span class="st">&quot;rmse&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(mean)</a>
-<a class="sourceLine" id="cb79-4" data-line-number="4">c</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="co"># residue plots, clearly shows a pattern, which is not good</span></a>
+<a class="sourceLine" id="cb90-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb90-3" data-line-number="3">c =<span class="st"> </span>c <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(.metric<span class="op">==</span><span class="st">&quot;rmse&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(mean)</a>
+<a class="sourceLine" id="cb90-4" data-line-number="4">c</a></code></pre></div>
 <pre><code>## # A tibble: 25 × 8
 ##     mtry min_n .metric .estimator  mean     n std_err .config              
 ##    &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;                
-##  1     2    33 rmse    standard    1.19    10  0.0514 Preprocessor1_Model10
-##  2     3    23 rmse    standard    1.20    10  0.0517 Preprocessor1_Model13
-##  3     7    37 rmse    standard    1.21    10  0.0510 Preprocessor1_Model25
-##  4     4    14 rmse    standard    1.21    10  0.0525 Preprocessor1_Model06
-##  5    12    35 rmse    standard    1.21    10  0.0512 Preprocessor1_Model15
-##  6     6    12 rmse    standard    1.22    10  0.0529 Preprocessor1_Model18
-##  7    20    40 rmse    standard    1.22    10  0.0515 Preprocessor1_Model23
-##  8     8    15 rmse    standard    1.22    10  0.0528 Preprocessor1_Model21
-##  9    15    28 rmse    standard    1.22    10  0.0514 Preprocessor1_Model03
-## 10     5     6 rmse    standard    1.23    10  0.0535 Preprocessor1_Model19
+##  1     2    33 rmse    standard    1.20    25  0.0258 Preprocessor1_Model10
+##  2     3    23 rmse    standard    1.20    25  0.0258 Preprocessor1_Model13
+##  3     7    37 rmse    standard    1.20    25  0.0259 Preprocessor1_Model25
+##  4     4    14 rmse    standard    1.21    25  0.0256 Preprocessor1_Model06
+##  5    12    35 rmse    standard    1.21    25  0.0257 Preprocessor1_Model15
+##  6    20    40 rmse    standard    1.21    25  0.0253 Preprocessor1_Model23
+##  7    15    28 rmse    standard    1.22    25  0.0253 Preprocessor1_Model03
+##  8     6    12 rmse    standard    1.22    25  0.0253 Preprocessor1_Model18
+##  9    25    36 rmse    standard    1.22    25  0.0249 Preprocessor1_Model09
+## 10     8    15 rmse    standard    1.22    25  0.0254 Preprocessor1_Model21
 ## # … with 15 more rows</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="co"># best model rmse is 1.19, std is 0.0514, the null model rmse is 1.22, std = 0. Thus, the model seems to perform the same as the two models above.</span></a>
-<a class="sourceLine" id="cb81-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb81-3" data-line-number="3"><span class="co">############### Model Selection #################</span></a>
-<a class="sourceLine" id="cb81-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb81-5" data-line-number="5"><span class="co"># It looks like the 3 models have the same rmse values, and also similar std. I do not know which model tends to overfit more, I will randomly pick one. </span></a>
-<a class="sourceLine" id="cb81-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb81-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb81-8" data-line-number="8"><span class="co">################ Final Fit ################</span></a>
-<a class="sourceLine" id="cb81-9" data-line-number="9"><span class="co"># I picked random forest model</span></a>
-<a class="sourceLine" id="cb81-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb81-11" data-line-number="11">last_fit &lt;-<span class="st"> </span>final_wf_rf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(test_data) </a>
-<a class="sourceLine" id="cb81-12" data-line-number="12">df_rf_last &lt;-<span class="st"> </span>last_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>(test_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(.pred, BodyTemp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">residue =</span> BodyTemp <span class="op">-</span><span class="st"> </span>.pred)</a>
-<a class="sourceLine" id="cb81-13" data-line-number="13">df_rf_last<span class="op">$</span>id &lt;-<span class="st"> </span><span class="kw">seq.int</span>(<span class="kw">nrow</span>(df_rf_last))</a>
-<a class="sourceLine" id="cb81-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb81-15" data-line-number="15"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> df_rf_last, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> BodyTemp), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> df_rf_last, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> .pred), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;
-## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="co"># best model rmse is 1.20, std is 0.0258, the null model rmse is 1.22, std = 0. Thus, the model seems to perform the same as the two models above.</span></a>
+<a class="sourceLine" id="cb92-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb92-3" data-line-number="3"><span class="co">############### Model Selection #################</span></a>
+<a class="sourceLine" id="cb92-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb92-5" data-line-number="5"><span class="co"># It looks like the 3 models have the similar rmse values, and also same std. I do not know which model tends to overfit more, I will randomly pick one. </span></a>
+<a class="sourceLine" id="cb92-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb92-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb92-8" data-line-number="8"><span class="co">################ Final Fit ################</span></a>
+<a class="sourceLine" id="cb92-9" data-line-number="9"><span class="co"># I picked random forest model</span></a>
+<a class="sourceLine" id="cb92-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb92-11" data-line-number="11">last_fit &lt;-<span class="st"> </span>final_wf_rf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(test_data) </a>
+<a class="sourceLine" id="cb92-12" data-line-number="12">df_rf_last &lt;-<span class="st"> </span>last_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>(test_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(.pred, BodyTemp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">residue =</span> BodyTemp <span class="op">-</span><span class="st"> </span>.pred)</a>
+<a class="sourceLine" id="cb92-13" data-line-number="13">df_rf_last<span class="op">$</span>id &lt;-<span class="st"> </span><span class="kw">seq.int</span>(<span class="kw">nrow</span>(df_rf_last))</a>
+<a class="sourceLine" id="cb92-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb92-15" data-line-number="15"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df_rf_last, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> BodyTemp), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df_rf_last, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> .pred), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-10.png" width="672" /></p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="co"># blue curve is the actual, red curve is predicted</span></a>
-<a class="sourceLine" id="cb83-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb83-3" data-line-number="3"><span class="kw">ggplot</span>(df_rf_last, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> residue)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="co"># blue curve is the actual, red curve is predicted</span></a>
+<a class="sourceLine" id="cb93-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb93-3" data-line-number="3"><span class="kw">ggplot</span>(df_rf_last, <span class="kw">aes</span>(<span class="dt">x =</span> id, <span class="dt">y =</span> residue)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="analysis_module11_files/figure-html/unnamed-chunk-1-11.png" width="672" /></p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">df_rf_last <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rmse</span>(<span class="dt">truth=</span>BodyTemp,.pred)</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">df_rf_last <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rmse</span>(<span class="dt">truth=</span>BodyTemp,.pred)</a></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   .metric .estimator .estimate
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
 ## 1 rmse    standard        1.12</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co"># final rmse is 1.12, much better than the training sets</span></a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="co"># final rmse is 1.12, much better than the training sets</span></a></code></pre></div>
 
 
 
